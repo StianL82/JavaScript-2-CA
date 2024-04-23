@@ -1,0 +1,122 @@
+/*---------- My Google Fonts ----------*/
+
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Satisfy&family=Shadows+Into+Light&display=swap');
+
+
+/*---------- My Changes to the Bootstrap CSS ----------*/
+
+$gray-900: #605D5D;
+
+$enable-gradients: true;
+
+$info: #D9D0BF;
+$dark: #303531;
+$info2: #B59482;
+$primary:green;
+$custom-grey: #605D5D;
+$custom-light-grey: #e6e5e5;
+$warning: #E4970B;
+$danger: #761313;
+
+$theme-colors: (
+  "info":        $info,
+  "warning":     $warning,
+  "danger":      $danger,
+  "primary":     $primary,
+  "dark":        $dark,
+  "info2":       $info2,
+  "custom-grey": $custom-grey,  
+  "custom-light-grey": $custom-light-grey,
+);
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1200px
+);
+
+
+/*---------- My Imports ----------*/
+
+@import "../../node_modules/bootstrap/scss/functions";
+@import "variables";
+@import "variables-dark";
+@import "../../node_modules/bootstrap/scss/maps";
+@import "../../node_modules/bootstrap/scss/mixins";
+@import "../../node_modules/bootstrap/scss/utilities";
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+
+/*---------- My custom CSS ----------*/
+
+.dropdown-toggle::after {
+  content: none;
+}
+
+li {
+  list-style-type: none;
+}
+
+.h1-logo {
+  font-family: Bangers, Arial, Helvetica, sans-serif;
+  font-size: clamp(1.6rem, 5vw, 3rem); /* Bruk clamp for dynamisk fontstørrelse */
+}
+
+.welcome-text{
+  font-family: Lora, Arial, Helvetica, sans-serif;
+}
+
+.userimage{
+  width: 50%;
+}
+
+.profile-picture{
+  width: 80%;
+}
+
+.profile-pic{
+  max-width: 15%;
+}
+
+.icon{
+  max-width: 50px;
+  max-height: 50px;
+}
+
+.icon-small{
+  max-width: 30px;
+  max-height: 30px;
+  transition: transform 0.3s, filter 0.3s;
+  cursor: pointer;
+}
+
+.icon-xs{
+  max-width: 20px;
+  max-height: 20px;
+}
+
+.icon-small:hover {
+  transform: scale(1.1);
+}
+
+.profile-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  color: #e6e5e5;
+}
