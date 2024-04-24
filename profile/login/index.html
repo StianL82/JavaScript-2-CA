@@ -14,7 +14,6 @@
       src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
     ></script>
     <script type="module" src="../../js/index.mjs"></script>
-    <script type="module" src="../../js/handlers/register.mjs"></script>
     <link rel="icon" href="../../images/profile_me_small.png" />
   </head>
 
@@ -33,7 +32,7 @@
             class="col-12 col-md-8 col-lg-6 border border-dark rounded-2 bg-info"
           >
             <h2 class="my-4 text-center">Login</h2>
-            <form action="/profile/">
+            <form id="loginForm">
               <div class="form-group text-black">
                 <label for="email" class="mb-2">Email:</label>
                 <input
@@ -62,8 +61,8 @@
               </div>
               <div class="text-center mb-4 fs-4">
                 <span
-                  >or <a href="../register/index.html">register</a> if you don't
-                  have an account</span
+                  >or <a href="../register/">register</a> if you don't have an
+                  account</span
                 >
               </div>
             </form>
