@@ -1,6 +1,6 @@
 import { setRegisterFormListener } from "./handlers/register.mjs";
 import { setLoginFormListener } from "./handlers/login.mjs";
-import { updatePost } from "./api/posts/update.mjs";
+import * as post from "./api/posts/index.mjs";
 
 const path = location.pathname;
 
@@ -10,8 +10,8 @@ if (path === "/profile/login/") {
   setRegisterFormListener();
 }
 
-updatePost({
-  id: 11934,
-  title: "Denne eksempelposten har blitt oppdatert",
-  body: "Det har denne bodyen også",
-});
+/* post.createPost(); */
+/* post.updatePost(); */
+/* post.deletePost(); */
+/* post.getPost(1).then(console.log); */
+/* post.getPosts().then(console.log); */
