@@ -13,6 +13,7 @@
       defer
       src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
     ></script>
+    <script type="module" src="../js/index.mjs"></script>
     <link rel="icon" href="/images/profile_me_small.png" />
   </head>
   <body class="bg-dark">
@@ -113,7 +114,7 @@
                     />
                   </div>
                   <div class="text-center text-black d-flex flex-column">
-                    <span class="fs-3">Stian Lilleng</span>
+                    <span id="loggedInUsername" class="fs-3"></span>
                     <span class="fs-5">98 Posts</span>
                     <span class="fs-5">Joined: 248 days ago</span>
                   </div>

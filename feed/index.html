@@ -13,6 +13,7 @@
       defer
       src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
     ></script>
+    <script type="module" src="../js/index.mjs"></script>
     <link rel="icon" href="/images/profile_me_small.png" />
   </head>
   <body class="bg-dark">
@@ -130,9 +131,10 @@
                     class="profile-pic ps-md-4 p-lg-2 pb-0 pt-3"
                     alt="The profile image of the logged in user"
                   />
-                  <p class="text-center text-danger fs-5 ms-3 mt-4">
-                    StianL-82
-                  </p>
+                  <p
+                    id="loggedInUsername"
+                    class="text-center text-danger fs-5 ms-3 mt-4"
+                  ></p>
                 </div>
                 <form class="border bg-info rounded-2">
                   <div class="form-group m-2">
