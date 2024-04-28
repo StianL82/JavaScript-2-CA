@@ -17,6 +17,7 @@ export async function router() {
     case "/profile/login/":
     case "/profile/login":
     case "/profile/login.html":
+    case "/profile/login/index.html":
       setLoginFormListener();
       break;
     //FeedPage
