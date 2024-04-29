@@ -120,3 +120,21 @@ li {
   border: 0;
   color: #e6e5e5;
 }
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1; /* Flexes to fill remaining space */
+}
+
+.footer {
+  width: 100%;
+}

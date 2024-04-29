@@ -1,7 +1,5 @@
-import { setRegisterFormListener } from "./handlers/register.mjs";
-import { setLoginFormListener } from "./handlers/login.mjs";
-import * as postMethods from "./api/posts/index.mjs";
 import * as templates from "./templates/index.mjs";
+import * as handlers from "./handlers/index.mjs";
 
 const path = location.pathname;
 
@@ -11,14 +9,14 @@ export async function router() {
     case "/profile/register/":
     case "/profile/register":
     case "/profile/register.html":
-      setRegisterFormListener();
+      handlers.setRegisterFormListener();
       break;
     //Login Page
     case "/profile/login/":
     case "/profile/login":
     case "/profile/login.html":
     case "/profile/login/index.html":
-      setLoginFormListener();
+      handlers.setLoginFormListener();
       break;
     //FeedPage
     case "/feed/":
@@ -26,6 +24,15 @@ export async function router() {
     case "/feed.html":
     case "/feed/index.html":
       templates.updateUsername();
+      handlers.setCreatePostFormListener();
+      break;
+    //Update Post Page
+    case "/feed/edit/":
+    case "/feed/edit":
+    case "/feed/edit.html":
+    case "/feed/edit.html":
+      templates.updateUsername();
+      handlers.setUpdatePostFormListener();
       break;
     //Profile Page
     case "/profile/":
