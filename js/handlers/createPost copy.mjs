@@ -1,4 +1,4 @@
-import { createPost } from "../api/posts/create.mjs";
+/* import { createPost } from "../api/posts/create.mjs";
 import { renderPostTemplate } from "../templates/post.mjs";
 
 export function setupAddPostFormListener() {
@@ -26,4 +26,4 @@ export function setupAddPostFormListener() {
       console.error("Error creating post:", error);
     }
   });
-}
+} */

@@ -8,13 +8,13 @@
       content="This is the feed page for the Social Media App, GrumpyBunch. Watch the feed of posts from all the members of the app."
     />
     <title>Edit Post | GrumpyBunch</title>
-    <link rel="stylesheet" href="/dist/css/index.css" />
+    <link rel="stylesheet" href="../../dist/css/index.css" />
     <script
       defer
-      src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+      src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
     ></script>
-    <script type="module" src="../js/index.mjs"></script>
-    <link rel="icon" href="/images/profile_me_small.png" />
+    <script type="module" src="../../js/index.mjs"></script>
+    <link rel="icon" href="../../images/profile_me_small.png" />
   </head>
   <body class="bg-dark">
     <nav class="navbar sticky-top navbar-expand-lg bg-danger">
@@ -33,7 +33,7 @@
             aria-expanded="false"
           >
             <img
-              src="../images/profile_me_small.png"
+              src="../../images/profile_me_small.png"
               class="userimage"
               alt="Profile Picture"
             />
@@ -51,7 +51,9 @@
               <a class="dropdown-item disabled" href="#">Profile Settings</a>
             </li>
             <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" href="../index.html">Log Out</a></li>
+            <li>
+              <a class="dropdown-item" href="../../index.html">Log Out</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -66,7 +68,7 @@
               <div class="col-12 bg-info rounded-2 text-black">
                 <div class="d-flex align-items-center mb-2">
                   <img
-                    src="../images/profile_me_small.png"
+                    src="../../images/profile_me_small.png"
                     class="profile-pic ps-md-4 p-lg-2 pb-0 pt-3"
                     alt="The profile image of the logged in user"
                   />
@@ -74,7 +76,7 @@
                     class="loggedInUsername text-center text-danger fs-5 ms-3 mt-4"
                   ></p>
                 </div>
-                <form id="createPost" class="border bg-info rounded-2">
+                <form id="updatePost" class="border bg-info rounded-2">
                   <div class="form-group m-2">
                     <label for="title">Title</label>
                     <input
