@@ -11955,4 +11955,9 @@ main {
   width: 100%;
 }
 
+.form-control:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 /*# sourceMappingURL=index.css.map */

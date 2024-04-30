@@ -41,6 +41,13 @@ export async function router() {
     case "/profile/index.html":
       templates.updateUsername();
       break;
+    //Profile Edit
+    case "/profile/edit/":
+    case "/profile/edit":
+    case "/profile/edit.html":
+    case "/profile/edit/index.html":
+      handlers.setUpdateProfileListener();
+      break;
 
     default:
       console.log("404 - not found");
