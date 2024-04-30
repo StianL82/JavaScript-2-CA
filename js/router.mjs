@@ -23,7 +23,7 @@ export async function router() {
     case "/feed":
     case "/feed.html":
     case "/feed/index.html":
-      templates.updateUsername();
+      templates.updateUserData();
       handlers.setCreatePostFormListener();
       break;
     //Update Post Page
@@ -31,7 +31,7 @@ export async function router() {
     case "/feed/edit":
     case "/feed/edit.html":
     case "/feed/edit.html":
-      templates.updateUsername();
+      templates.updateUserData();
       handlers.setUpdatePostFormListener();
       break;
     //Profile Page
@@ -39,13 +39,14 @@ export async function router() {
     case "/profile":
     case "/profile.html":
     case "/profile/index.html":
-      templates.updateUsername();
+      templates.updateUserData();
       break;
     //Profile Edit
     case "/profile/edit/":
     case "/profile/edit":
     case "/profile/edit.html":
     case "/profile/edit/index.html":
+      templates.updateUserData();
       handlers.setUpdateProfileListener();
       break;
 

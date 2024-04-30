@@ -26,7 +26,7 @@ export async function register(profile) {
       alert("Registration successful! Please log in to continue.");
 
       // Omdiriger til innloggingssiden
-      window.location.href = "../../../profile/login/index.html"; // Endre URL-en til din innloggingssides URL
+      window.location.href = "../../../profile/login/"; // Endre URL-en til din innloggingssides URL
     } else {
       const errorMessage = await response.text();
       if (response.status === 400) {

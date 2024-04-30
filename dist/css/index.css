@@ -11887,15 +11887,27 @@ li {
 }
 
 .userimage {
-  width: 50%;
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
 }
 
 .profile-picture {
-  width: 80%;
+  width: 100%;
+  max-width: 150px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 50%;
+  aspect-ratio: 1/1;
 }
 
 .profile-pic {
-  max-width: 15%;
+  width: 100%;
+  max-width: 60px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 50%;
+  aspect-ratio: 1/1;
 }
 
 .icon {
@@ -11953,6 +11965,7 @@ main {
 
 .footer {
   width: 100%;
+  padding: 50px;
 }
 
 .form-control:disabled {

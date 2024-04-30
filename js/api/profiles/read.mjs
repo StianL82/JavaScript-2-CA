@@ -12,7 +12,7 @@ export async function getProfiles() {
   return await response.json();
 }
 
-export async function getProfile(name = load("profile").name) {
+export async function getProfile(name) {
   const getProfileURL = `${API_SOCIAL_URL}${action}/${name}`;
 
   const response = await authFetch(getProfileURL);
