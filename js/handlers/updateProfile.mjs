@@ -1,5 +1,4 @@
 import { getProfile, updateProfile } from "../api/profiles/index.mjs";
-
 import { load } from "../storage/index.mjs";
 
 export async function setUpdateProfileListener() {
@@ -29,7 +28,18 @@ export async function setUpdateProfileListener() {
       profile.name = name;
       profile.email = email;
 
-      updateProfile(profile);
+      try {
+        const updatedProfile = await updateProfile(profile);
+
+        const storedProfile = JSON.parse(localStorage.getItem("profile"));
+        storedProfile.banner = updatedProfile.banner;
+        storedProfile.avatar = updatedProfile.avatar;
+        localStorage.setItem("profile", JSON.stringify(storedProfile));
+
+        window.location.reload();
+      } catch (error) {
+        console.error("Feil ved oppdatering av profil:", error);
+      }
     });
   }
 }

@@ -14,20 +14,22 @@ function updateUsername() {
   }
 }
 
-function updateAvatar() {
-  const userData = storage.load("profile");
+export async function updateAvatar() {
+  const userData = await storage.load("profile");
+  const defaultAvatar =
+    "https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHx8Mg%3D%3D";
 
-  if (userData && userData.avatar) {
-    const avatarImageElements = document.querySelectorAll(".avatar-image");
-    avatarImageElements.forEach((element) => {
+  const avatarImageElements = document.querySelectorAll(".avatar-image");
+  avatarImageElements.forEach((element) => {
+    if (userData && userData.avatar) {
       element.src = userData.avatar;
-    });
-  } else {
-    console.error("Avatar ikke tilgjengelig");
-  }
+    } else {
+      element.src = defaultAvatar;
+    }
+  });
 }
 
-export function updateUserData() {
+export async function updateUserData() {
   updateUsername();
   updateAvatar();
 }
