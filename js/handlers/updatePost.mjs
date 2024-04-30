@@ -7,12 +7,17 @@ export async function setUpdatePostFormListener() {
   const id = url.searchParams.get("id");
 
   if (form) {
+    const button = form.querySelector("button");
+    button.disabled = true;
+
     const post = await getPost(id);
 
     form.title.value = post.title;
     form.body.value = post.body;
     form.tags.value = post.tags;
     form.media.value = post.media;
+
+    button.disabled = false;
 
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
