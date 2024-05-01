@@ -1,5 +1,7 @@
 import * as templates from "./templates/index.mjs";
 import * as handlers from "./handlers/index.mjs";
+import * as posts from "./api/posts/index.mjs";
+import * as profiles from "./api/profiles/index.mjs";
 
 const path = location.pathname;
 
@@ -24,6 +26,9 @@ export async function router() {
     case "/feed.html":
     case "/feed/index.html":
       await templates.updateUserData();
+      templates.renderPosts();
+      posts.getPosts().then(console.log);
+      profiles.getProfiles().then(console.log);
       handlers.setCreatePostFormListener();
       break;
     //Update Post Page

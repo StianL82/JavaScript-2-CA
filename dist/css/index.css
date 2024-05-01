@@ -11910,6 +11910,18 @@ li {
   aspect-ratio: 1/1;
 }
 
+.post-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 20px 20px 20px; /* Legg til ønsket margin */
+}
+
+.post-image {
+  max-width: 100%;
+  height: auto;
+}
+
 .icon {
   max-width: 50px;
   max-height: 50px;
