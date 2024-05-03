@@ -2,6 +2,7 @@ import * as templates from "./templates/index.mjs";
 import * as handlers from "./handlers/index.mjs";
 import * as posts from "./api/posts/index.mjs";
 import * as profiles from "./api/profiles/index.mjs";
+import * as components from "./components/index.mjs";
 
 const path = location.pathname;
 
@@ -30,6 +31,7 @@ export async function router() {
       posts.getPosts().then(console.log);
       profiles.getProfiles().then(console.log);
       handlers.setCreatePostFormListener();
+      components.openModal();
       break;
     //Update Post Page
     case "/feed/edit/":
@@ -59,3 +61,12 @@ export async function router() {
       console.log("404 - not found");
   }
 }
+
+/* document
+  .getElementById("openModalButton")
+  .addEventListener("click", function () {
+    var myModal = new bootstrap.Modal(
+      document.getElementById("staticBackdrop")
+    );
+    myModal.show();
+  }); */

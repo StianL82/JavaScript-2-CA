@@ -1,8 +1,9 @@
 import { getProfiles } from "../api/profiles/read.mjs";
 import { updateUserData } from "./updateUserData.mjs";
+import { defaultAvatar, isValidURL } from "./updateUserData.mjs";
 
 export function postTemplate(postData) {
-  const { name, avatar, content } = postData;
+  const { name, avatar, content, author } = postData;
   const post = document.createElement("div");
   post.classList.add("card", "mb-4", "bg-info", "text-black");
 
@@ -38,7 +39,7 @@ export function postTemplate(postData) {
 
   const editIcon = document.createElement("img");
   editIcon.src = "../images/icon_edit.png";
-  editIcon.alt = "";
+  editIcon.alt = "Edit Post";
   editIcon.classList.add("img-fluid", "me-2");
   editIcon.style.maxHeight = "1rem";
   editContainer.appendChild(editIcon);
@@ -52,21 +53,34 @@ export function postTemplate(postData) {
   deleteItem.classList.add("d-flex");
   dropdownMenu.appendChild(deleteItem);
 
-  const deleteContainer = document.createElement("div");
-  deleteContainer.classList.add("d-flex", "align-items-center", "m-2");
-  deleteItem.appendChild(deleteContainer);
+  // Opprett en ny div for knappen
+  const deleteButtonContainer = document.createElement("div");
+  deleteButtonContainer.classList.add("d-flex", "align-items-center", "m-2");
+  deleteItem.appendChild(deleteButtonContainer);
 
+  // Opprett delete-ikonet
   const deleteIcon = document.createElement("img");
   deleteIcon.src = "../images/icon_delete.png";
-  deleteIcon.alt = "";
+  deleteIcon.alt = "Delete Post";
   deleteIcon.classList.add("img-fluid", "me-2");
   deleteIcon.style.maxHeight = "1rem";
-  deleteContainer.appendChild(deleteIcon);
+  deleteButtonContainer.appendChild(deleteIcon);
 
-  const deleteText = document.createElement("p");
-  deleteText.classList.add("m-0");
-  deleteText.textContent = "Delete Post";
-  deleteContainer.appendChild(deleteText);
+  // Opprett delete-knappen
+  const deleteButton = document.createElement("button");
+  deleteButton.type = "button";
+  deleteButton.classList.add("btn", "btn-primary", "open-modal-button"); // Legg til "open-modal-button" klassen
+  deleteButton.textContent = "Delete Post";
+  deleteButtonContainer.appendChild(deleteButton);
+
+  // Legg til hendelseslytter for klikk på delete-knappen
+  deleteButton.addEventListener("click", function () {
+    // Finn modalen ved hjelp av classen og vis den
+    var myModal = new bootstrap.Modal(
+      document.querySelector(".staticBackdrop")
+    );
+    myModal.show();
+  });
 
   const rowDiv = document.createElement("div");
   rowDiv.classList.add("row");
@@ -84,21 +98,30 @@ export function postTemplate(postData) {
   );
   rowDiv.appendChild(thumbnailColumn);
 
-  /////////////////////// her må jeg få lagt inn korrekt avatar og name
-
   const thumbnailDiv = document.createElement("div");
   thumbnailColumn.appendChild(thumbnailDiv);
 
+  /////////////////////// her må jeg få lagt inn korrekt avatar og name
+
+  const authorAvatar = author.avatar;
   const thumbnailImage = document.createElement("img");
-  thumbnailImage.src = "../images/latest_post_1.png";
-  thumbnailImage.classList.add("card-img-top", "img-fluid", "p-3", "pb-0");
-  thumbnailImage.alt = "Thumbnail 1";
+
+  // Sjekk om forfatterens avatar er tomt, hvis det er tilfelle, bruk defaultAvatar
+  if (authorAvatar === "" || !isValidURL(authorAvatar)) {
+    thumbnailImage.src = defaultAvatar;
+  } else {
+    thumbnailImage.src = authorAvatar;
+  }
+
+  thumbnailImage.classList.add("profile-avatar", "card-img-top");
+  thumbnailImage.alt = "Avatar";
   thumbnailDiv.appendChild(thumbnailImage);
 
-  const authorName = document.createElement("p");
-  authorName.classList.add("text-center", "text-danger");
-  authorName.textContent = "Example Data";
-  thumbnailColumn.appendChild(authorName);
+  const authorName = author.name;
+  const authorNameContainer = document.createElement("p");
+  authorNameContainer.classList.add("text-center", "text-danger", "mt-0");
+  authorNameContainer.textContent = authorName; // Bruk forfatterens navn
+  thumbnailColumn.appendChild(authorNameContainer);
 
   const bodyColumn = document.createElement("div");
   bodyColumn.classList.add(

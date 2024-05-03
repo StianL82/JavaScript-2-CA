@@ -11892,13 +11892,17 @@ li {
   object-fit: cover;
 }
 
-.profile-picture {
+.profile-picture, .profile-avatar {
   width: 100%;
-  max-width: 150px;
+  max-width: 120px;
   height: auto;
   object-fit: cover;
   border-radius: 50%;
   aspect-ratio: 1/1;
+}
+
+.profile-avatar {
+  max-width: 100px;
 }
 
 .profile-pic {
@@ -11983,6 +11987,18 @@ main {
 .form-control:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.modal-dialog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100% - 3.5rem);
+}
+
+.modal-content {
+  width: 90%;
+  max-width: 500px; /* Juster denne verdien etter behov */
 }
 
 /*# sourceMappingURL=index.css.map */
