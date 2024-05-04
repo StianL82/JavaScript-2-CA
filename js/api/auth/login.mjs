@@ -36,3 +36,27 @@ export async function login(profile) {
     );
   }
 }
+
+// Funksjon for å hente innlogget bruker fra lagringen
+export function getLoggedInUser() {
+  // Hent token og profildata fra lagringen
+  const accessToken = storage.load("token");
+  const userProfile = storage.load("profile");
+
+  // Sjekk om både token og profildata er tilgjengelig
+  if (accessToken && userProfile) {
+    // Returner brukerprofilen
+    return userProfile;
+  } else {
+    // Returner null hvis ikke innlogget bruker er tilgjengelig
+    return null;
+  }
+}
+
+// Eksempel på bruk av getLoggedInUser-funksjonen
+const loggedInUser = getLoggedInUser();
+if (loggedInUser) {
+  console.log("Logged-in user:", loggedInUser);
+} else {
+  console.log("No logged-in user found.");
+}

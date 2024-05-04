@@ -1,86 +1,95 @@
 import { getProfiles } from "../api/profiles/read.mjs";
 import { updateUserData } from "./updateUserData.mjs";
 import { defaultAvatar, isValidURL } from "./updateUserData.mjs";
+import { getLoggedInUser } from "../api/auth/login.mjs"; // Anta at du har en modul for å hente innlogget bruker
 
 export function postTemplate(postData) {
   const { name, avatar, content, author } = postData;
+  const loggedInUser = getLoggedInUser(); // Hent innlogget bruker
+  const isAuthorLoggedIn = loggedInUser && loggedInUser.name === author.name; // Sjekk om innlogget bruker er forfatteren av posten basert på navn
+
   const post = document.createElement("div");
   post.classList.add("card", "mb-4", "bg-info", "text-black");
 
-  const dropdownContainer = document.createElement("div");
-  dropdownContainer.classList.add(
-    "d-flex",
-    "justify-content-end",
-    "me-3",
-    "position-relative"
-  );
-  post.appendChild(dropdownContainer);
-
-  const dotsIcon = document.createElement("img");
-  dotsIcon.src = "../images/icon_dots.png";
-  dotsIcon.classList.add("dropdown-toggle");
-  dotsIcon.role = "button";
-  dotsIcon.setAttribute("data-bs-toggle", "dropdown");
-  dotsIcon.setAttribute("aria-expanded", "false");
-  dotsIcon.alt = "Three dotted icon";
-  dropdownContainer.appendChild(dotsIcon);
-
-  const dropdownMenu = document.createElement("ul");
-  dropdownMenu.classList.add("dropdown-menu", "dropdown-menu-end");
-  dropdownContainer.appendChild(dropdownMenu);
-
-  const editItem = document.createElement("li");
-  editItem.classList.add("d-flex");
-  dropdownMenu.appendChild(editItem);
-
-  const editContainer = document.createElement("div");
-  editContainer.classList.add("d-flex", "align-items-center", "m-2");
-  editItem.appendChild(editContainer);
-
-  const editIcon = document.createElement("img");
-  editIcon.src = "../images/icon_edit.png";
-  editIcon.alt = "Edit Post";
-  editIcon.classList.add("img-fluid", "me-2");
-  editIcon.style.maxHeight = "1rem";
-  editContainer.appendChild(editIcon);
-
-  const editText = document.createElement("p");
-  editText.classList.add("m-0");
-  editText.textContent = "Edit Post";
-  editContainer.appendChild(editText);
-
-  const deleteItem = document.createElement("li");
-  deleteItem.classList.add("d-flex");
-  dropdownMenu.appendChild(deleteItem);
-
-  // Opprett en ny div for knappen
-  const deleteButtonContainer = document.createElement("div");
-  deleteButtonContainer.classList.add("d-flex", "align-items-center", "m-2");
-  deleteItem.appendChild(deleteButtonContainer);
-
-  // Opprett delete-ikonet
-  const deleteIcon = document.createElement("img");
-  deleteIcon.src = "../images/icon_delete.png";
-  deleteIcon.alt = "Delete Post";
-  deleteIcon.classList.add("img-fluid", "me-2");
-  deleteIcon.style.maxHeight = "1rem";
-  deleteButtonContainer.appendChild(deleteIcon);
-
-  // Opprett delete-knappen
-  const deleteButton = document.createElement("button");
-  deleteButton.type = "button";
-  deleteButton.classList.add("btn", "btn-primary", "open-modal-button"); // Legg til "open-modal-button" klassen
-  deleteButton.textContent = "Delete Post";
-  deleteButtonContainer.appendChild(deleteButton);
-
-  // Legg til hendelseslytter for klikk på delete-knappen
-  deleteButton.addEventListener("click", function () {
-    // Finn modalen ved hjelp av classen og vis den
-    var myModal = new bootstrap.Modal(
-      document.querySelector(".staticBackdrop")
+  // Opprett dropdown-container og dropdown-knapp bare hvis innlogget bruker er forfatteren
+  if (isAuthorLoggedIn) {
+    const dropdownContainer = document.createElement("div");
+    dropdownContainer.classList.add(
+      "d-flex",
+      "justify-content-end",
+      "me-3",
+      "position-relative"
     );
-    myModal.show();
-  });
+    post.appendChild(dropdownContainer);
+
+    const dotsIcon = document.createElement("img");
+    dotsIcon.src = "../images/icon_dots.png";
+    dotsIcon.classList.add("dropdown-toggle");
+    dotsIcon.role = "button";
+    dotsIcon.setAttribute("data-bs-toggle", "dropdown");
+    dotsIcon.setAttribute("aria-expanded", "false");
+    dotsIcon.alt = "Three dotted icon";
+    dropdownContainer.appendChild(dotsIcon);
+
+    const dropdownMenu = document.createElement("ul");
+    dropdownMenu.classList.add("dropdown-menu", "dropdown-menu-end");
+    dropdownContainer.appendChild(dropdownMenu);
+
+    const editItem = document.createElement("li");
+    editItem.classList.add("d-flex");
+    dropdownMenu.appendChild(editItem);
+
+    const editContainer = document.createElement("div");
+    editContainer.classList.add("d-flex", "align-items-center", "m-2");
+    editItem.appendChild(editContainer);
+
+    const editIcon = document.createElement("img");
+    editIcon.src = "../images/icon_edit.png";
+    editIcon.alt = "Edit Post";
+    editIcon.classList.add("img-fluid", "me-2");
+    editIcon.style.maxHeight = "1rem";
+    editContainer.appendChild(editIcon);
+
+    const editText = document.createElement("p");
+    editText.classList.add("m-0");
+    editText.textContent = "Edit Post";
+    editContainer.appendChild(editText);
+
+    const deleteItem = document.createElement("li");
+    deleteItem.classList.add("d-flex");
+    dropdownMenu.appendChild(deleteItem);
+
+    // Opprett en ny div for knappen
+    const deleteButtonContainer = document.createElement("div");
+    deleteButtonContainer.classList.add("d-flex", "align-items-center", "m-2");
+    deleteItem.appendChild(deleteButtonContainer);
+
+    // Opprett delete-ikonet
+    const deleteIcon = document.createElement("img");
+    deleteIcon.src = "../images/icon_delete.png";
+    deleteIcon.alt = "Delete Post";
+    deleteIcon.classList.add("img-fluid", "me-2");
+    deleteIcon.style.maxHeight = "1rem";
+    deleteButtonContainer.appendChild(deleteIcon);
+
+    // Opprett delete-knappen
+    const deleteButton = document.createElement("button");
+    deleteButton.type = "button";
+    deleteButton.classList.add("btn", "btn-primary", "open-modal-button"); // Legg til "open-modal-button" klassen
+    deleteButton.textContent = "Delete Post";
+    deleteButtonContainer.appendChild(deleteButton);
+
+    // Legg til hendelseslytter for klikk på delete-knappen
+    deleteButton.addEventListener("click", function () {
+      // Finn modalen ved hjelp av classen og vis den
+      var myModal = new bootstrap.Modal(
+        document.querySelector(".staticBackdrop")
+      );
+      myModal.show();
+    });
+  }
+
+  //////////////////////////////////////////////
 
   const rowDiv = document.createElement("div");
   rowDiv.classList.add("row");
@@ -113,8 +122,8 @@ export function postTemplate(postData) {
     thumbnailImage.src = authorAvatar;
   }
 
-  thumbnailImage.classList.add("profile-avatar", "card-img-top");
-  thumbnailImage.alt = "Avatar";
+  thumbnailImage.classList.add("profile-avatar", "card-img-top", "mt-3");
+  thumbnailImage.alt = "Avatar from the logged in User";
   thumbnailDiv.appendChild(thumbnailImage);
 
   const authorName = author.name;
