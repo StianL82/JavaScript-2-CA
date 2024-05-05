@@ -31,6 +31,7 @@ export async function router() {
       posts.getPosts().then(console.log);
       profiles.getProfiles().then(console.log);
       handlers.setCreatePostFormListener();
+      /*       handlers.handleDeletePost(); */
       components.openModal();
       break;
     //Update Post Page

@@ -1,10 +1,11 @@
 import { getProfiles } from "../api/profiles/read.mjs";
 import { updateUserData } from "./updateUserData.mjs";
 import { defaultAvatar, isValidURL } from "./updateUserData.mjs";
+import { removePost } from "../api/posts/delete.mjs";
 import { getLoggedInUser } from "../api/auth/login.mjs"; // Anta at du har en modul for å hente innlogget bruker
 
 export function postTemplate(postData) {
-  const { name, avatar, content, author } = postData;
+  const { id, author } = postData;
   const loggedInUser = getLoggedInUser(); // Hent innlogget bruker
   const isAuthorLoggedIn = loggedInUser && loggedInUser.name === author.name; // Sjekk om innlogget bruker er forfatteren av posten basert på navn
 
@@ -79,14 +80,98 @@ export function postTemplate(postData) {
     deleteButton.textContent = "Delete Post";
     deleteButtonContainer.appendChild(deleteButton);
 
-    // Legg til hendelseslytter for klikk på delete-knappen
+    // Opprett bekreftelsesmodalen
+    const modal = document.createElement("div");
+    modal.classList.add("modal", "fade", "staticBackdrop");
+    modal.setAttribute("data-bs-backdrop", "static");
+    modal.setAttribute("data-bs-keyboard", "false");
+    modal.setAttribute("tabindex", "-1");
+    modal.setAttribute("aria-labelledby", "staticBackdropLabel");
+    modal.setAttribute("aria-hidden", "true");
+
+    const modalDialog = document.createElement("div");
+    modalDialog.classList.add("modal-dialog");
+
+    const modalContent = document.createElement("div");
+    modalContent.classList.add("modal-content");
+
+    // Innholdet i modalen
+    const modalHeader = document.createElement("div");
+    modalHeader.classList.add("modal-header");
+    const modalTitle = document.createElement("h1");
+    modalTitle.classList.add("modal-title", "fs-5");
+    modalTitle.textContent = "Delete Post";
+    const closeButton = document.createElement("button");
+    closeButton.type = "button";
+    closeButton.classList.add("btn-close");
+    closeButton.setAttribute("data-bs-dismiss", "modal");
+    closeButton.setAttribute("aria-label", "Close");
+    modalHeader.appendChild(modalTitle);
+    modalHeader.appendChild(closeButton);
+
+    const modalBody = document.createElement("div");
+    modalBody.classList.add("modal-body");
+    modalBody.textContent = "Are you sure you want to delete the post?";
+
+    const modalFooter = document.createElement("div");
+    modalFooter.classList.add("modal-footer");
+    const closeButtonModal = document.createElement("button");
+    closeButtonModal.type = "button";
+    closeButtonModal.classList.add("btn", "btn-secondary");
+    closeButtonModal.setAttribute("data-bs-dismiss", "modal");
+    closeButtonModal.textContent = "Close";
+    const deleteButtonModal = document.createElement("button");
+    deleteButtonModal.type = "button";
+    deleteButtonModal.classList.add(
+      "btn",
+      "btn-danger",
+      "confirm-delete-button"
+    );
+    deleteButtonModal.textContent = "Delete Post";
+    modalFooter.appendChild(closeButtonModal);
+    modalFooter.appendChild(deleteButtonModal);
+
+    modalContent.appendChild(modalHeader);
+    modalContent.appendChild(modalBody);
+    modalContent.appendChild(modalFooter);
+    modalDialog.appendChild(modalContent);
+    modal.appendChild(modalDialog);
+    post.appendChild(modal); // Legg til modalen i posten
+
+    // Legg til en hendelseslytter på slettingsknappen
     deleteButton.addEventListener("click", function () {
-      // Finn modalen ved hjelp av classen og vis den
-      var myModal = new bootstrap.Modal(
-        document.querySelector(".staticBackdrop")
-      );
+      const postId = id; // Dette skal være ID-en fra postdata
+      const confirmDeleteButton = modal.querySelector(".confirm-delete-button");
+      confirmDeleteButton.dataset.postId = postId; // Sett post-ID som en attributt på bekreftelsesknappen
+
+      // Vis modalen
+      var myModal = new bootstrap.Modal(modal);
       myModal.show();
     });
+
+    // Det er viktig at denne koden ligger utenfor "click" event for deleteButton, slik at den ikke legger til flere lyttere
+    modal.querySelector(".confirm-delete-button").addEventListener(
+      "click",
+      async function () {
+        const postId = this.dataset.postId; // Hent post-ID fra data-attributt
+        try {
+          const status = await removePost(postId);
+          if (status === 200) {
+            // Endre fra 204 til 200 siden dette er statuskoden du får
+            let myModal = bootstrap.Modal.getInstance(modal);
+            myModal.hide(); // Lukker modalen
+            post.remove(); // Fjerner postelementet fra UI
+            alert("Post deleted successfully!");
+          } else {
+            alert("Failed to delete post");
+          }
+        } catch (error) {
+          console.error("Deletion error:", error);
+          alert("Error: " + (error.message || "Unknown error"));
+        }
+      },
+      { once: true } // Sørger for at hendelsen kun håndteres én gang
+    );
   }
 
   //////////////////////////////////////////////

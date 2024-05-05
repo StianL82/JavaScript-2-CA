@@ -12,5 +12,11 @@ export async function removePost(id) {
     method,
   });
 
-  return await response.json();
+  console.log("API Response:", response);
+
+  if (!response.ok) {
+    throw new Error("Failed to delete post: " + (await response.text()));
+  }
+
+  return response.status; // Returnerer kun statuskoden ettersom det ikke er noe innhold
 }
