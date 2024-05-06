@@ -22,27 +22,24 @@ export async function setUpdatePostFormListener() {
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
       const formData = new FormData(form);
-      const post = {};
+      const post = {
+        id: id, // Sørg for at denne ID-en hentes korrekt og er gyldig
+      };
 
-      // Legg til ID til post-objektet
-      post.id = id;
-
-      // Legg til resten av feltene fra skjemaet til post-objektet
       for (let [key, value] of formData.entries()) {
-        if (key === "tags") {
-          // Hvis feltet er "tags", formatere verdien som en array
-          post[key] = value.split(",").map((tag) => tag.trim());
-        } else {
-          post[key] = value;
-        }
+        post[key] =
+          key === "tags" ? value.split(",").map((tag) => tag.trim()) : value;
       }
 
       try {
-        // Oppdater innlegget ved hjelp av updatePost-funksjonen
-        await updatePost(post);
-
-        // Eventuelt gi tilbakemelding om vellykket oppdatering
-        console.log("Post updated successfully!");
+        const result = await updatePost(post);
+        if (result) {
+          console.log("Post updated successfully!");
+          const returnUrl =
+            sessionStorage.getItem("returnUrl") || "/defaultPath";
+          sessionStorage.removeItem("returnUrl"); // Fjern brukte data fra sessionStorage
+          window.location.href = returnUrl + "?updated=true"; // Naviger tilbake med oppdateringsparameter
+        }
       } catch (error) {
         console.error("Error updating post:", error);
       }

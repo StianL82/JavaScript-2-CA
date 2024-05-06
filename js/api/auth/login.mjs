@@ -52,11 +52,11 @@ export function getLoggedInUser() {
     return null;
   }
 }
-
+/* 
 // Eksempel på bruk av getLoggedInUser-funksjonen
 const loggedInUser = getLoggedInUser();
 if (loggedInUser) {
   console.log("Logged-in user:", loggedInUser);
 } else {
   console.log("No logged-in user found.");
-}
+} */

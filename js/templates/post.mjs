@@ -1,5 +1,3 @@
-import { getProfiles } from "../api/profiles/read.mjs";
-import { updateUserData } from "./updateUserData.mjs";
 import { defaultAvatar, isValidURL } from "./updateUserData.mjs";
 import { removePost } from "../api/posts/delete.mjs";
 import { getLoggedInUser } from "../api/auth/login.mjs"; // Anta at du har en modul for å hente innlogget bruker
@@ -51,10 +49,18 @@ export function postTemplate(postData) {
     editIcon.style.maxHeight = "1rem";
     editContainer.appendChild(editIcon);
 
-    const editText = document.createElement("p");
-    editText.classList.add("m-0");
-    editText.textContent = "Edit Post";
-    editContainer.appendChild(editText);
+    // Opprett edit-knappen
+    const editButton = document.createElement("button");
+    editButton.type = "button";
+    editButton.classList.add("btn", "btn-warning"); // Bruker "btn-warning" klassen for styling
+    editButton.textContent = "Edit Post";
+    editContainer.appendChild(editButton);
+
+    // Legg til en klikk-event handler for å omdirigere til redigeringssiden med postens ID
+    editButton.addEventListener("click", () => {
+      sessionStorage.setItem("returnUrl", window.location.href);
+      window.location.href = `/feed/edit/?id=${postData.id}`; // Bruker "id" som URL-parameter for konsistens med form listener
+    });
 
     const deleteItem = document.createElement("li");
     deleteItem.classList.add("d-flex");
@@ -182,9 +188,11 @@ export function postTemplate(postData) {
 
   const thumbnailColumn = document.createElement("div");
   thumbnailColumn.classList.add(
-    "col-sm-4",
+    "col-sm-3",
     "col-md-3",
     "col-lg-2",
+    "ps-sm-4",
+    "ps-md-5",
     "d-flex",
     "flex-column",
     "align-items-center",
@@ -220,7 +228,7 @@ export function postTemplate(postData) {
   const bodyColumn = document.createElement("div");
   bodyColumn.classList.add(
     "card-body",
-    "col-sm-8",
+    "col-sm-9",
     "col-md-9",
     "d-flex",
     "flex-column",
@@ -280,15 +288,6 @@ export function postTemplate(postData) {
   commentIcon.classList.add("icon-small");
   commentIcon.alt = "comment icon";
   commentIconContainer.appendChild(commentIcon);
-
-  /*   post.innerText = postData.title; */
-
-  /*   if (postData.media) {
-    const img = document.createElement("img");
-    img.src = postData.media;
-    img.alt = `Image from ${postData.title}`;
-    post.append(img);
-  } */
 
   return post;
 }
