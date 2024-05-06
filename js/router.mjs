@@ -49,6 +49,7 @@ export async function router() {
     case "/profile.html":
     case "/profile/index.html":
       await templates.updateUserData();
+      templates.renderUserPosts();
       break;
     //Profile Edit
     case "/profile/edit/":
