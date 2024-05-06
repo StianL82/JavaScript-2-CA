@@ -33,6 +33,7 @@ export async function router() {
       handlers.setCreatePostFormListener();
       /*       handlers.handleDeletePost(); */
       components.openModal();
+      components.setupSearchListener();
       break;
     //Update Post Page
     case "/feed/edit/":
