@@ -225,6 +225,7 @@ export function postTemplate(postData) {
   authorNameContainer.textContent = authorName; // Bruk forfatterens navn
   thumbnailColumn.appendChild(authorNameContainer);
 
+  // Oppretter bodyColumn som vil inneholde innholdet for posten
   const bodyColumn = document.createElement("div");
   bodyColumn.classList.add(
     "card-body",
@@ -236,6 +237,28 @@ export function postTemplate(postData) {
   );
   rowDiv.appendChild(bodyColumn);
 
+  ////DATO/////
+
+  // Oppretter en ny div for å vise datoen
+  const dateDiv = document.createElement("div");
+  dateDiv.classList.add("date-info", "mb-2", "ms-2");
+
+  // Formatterer datoene fra APIen
+  const createdDate = new Date(postData.created);
+  const dateFormatter = new Intl.DateTimeFormat("en-US", {
+    dateStyle: "medium",
+  });
+  dateDiv.textContent = `${dateFormatter.format(createdDate)}`;
+
+  if (postData.updated && postData.updated !== postData.created) {
+    const updatedDate = new Date(postData.updated);
+    dateDiv.textContent += ` | Updated: ${dateFormatter.format(updatedDate)}`;
+  }
+
+  // Legger datoen til i bodyColumn før contentDiv
+  bodyColumn.appendChild(dateDiv);
+
+  // Oppretter contentDiv som vil holde på selve innholdet og datoen
   const contentDiv = document.createElement("div");
   contentDiv.classList.add(
     "d-flex-column",
@@ -267,6 +290,30 @@ export function postTemplate(postData) {
     img.alt = `Image from ${postData.title}`;
     img.classList.add("post-image"); // Legg til klassen for bildet
     imgContainer.appendChild(img); // Legg til bildet i imgContainer
+  }
+
+  // Sjekk om det finnes tags og opprett en container for dem
+  if (postData.tags && postData.tags.length > 0) {
+    const tagsContainer = document.createElement("div");
+    tagsContainer.classList.add(
+      "d-flex",
+      "flex-wrap", // Legger til wrapping
+      "justify-content-start",
+      "gap-2",
+      "ms-2"
+    );
+    contentDiv.appendChild(tagsContainer);
+
+    // Iterer gjennom hver tag og opprett et span-element for hver
+    postData.tags.forEach((tag) => {
+      if (tag) {
+        // Sørg for at taggen ikke er en tom streng
+        const tagElement = document.createElement("span");
+        tagElement.classList.add("tag"); // Oppdater klassenavnet til "tag"
+        tagElement.textContent = `#${tag}`; // Legger til # foran taggen
+        tagsContainer.appendChild(tagElement);
+      }
+    });
   }
 
   const commentDiv = document.createElement("div");

@@ -18,22 +18,23 @@ export async function register(profile) {
     });
 
     if (response.ok) {
-      // Hvis registreringen er vellykket, lagre brukerdataene lokalt
       const userData = await response.json();
       storage.save("profile", userData);
 
-      // Vis en bekreftelsesmelding
-      alert("Registration successful! Please log in to continue.");
+      // Lagrer e-postadressen i sessionStorage
+      sessionStorage.setItem("userEmail", userData.email);
 
-      // Omdiriger til innloggingssiden
-      window.location.href = "../../../profile/login/"; // Endre URL-en til din innloggingssides URL
+      alert("Registration successful! Please log in to continue.");
+      window.location.href = "../../../profile/login/";
     } else {
       const errorMessage = await response.text();
-      if (response.status === 400) {
-        // Kontoen eksisterer allerede, vis en passende melding
-        alert("Account already exists. Please log in instead.");
+      if (response.status >= 400 && response.status < 500) {
+        // Klient-side feil, spesifiser melding basert på vanlige årsaker
+        alert(
+          `Client error occurred: ${errorMessage}. Please check your input and try again.`
+        );
       } else {
-        // Annen feil, vis en passende feilmelding
+        // Server-side feil eller annen type feil, vis en passende feilmelding
         alert("Registration failed: " + errorMessage);
       }
       throw new Error(errorMessage);
