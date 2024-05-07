@@ -8,6 +8,11 @@ const path = location.pathname;
 
 export async function router() {
   switch (path) {
+    //Main Page
+    case "/":
+    case "/index":
+    case "/index.html":
+      break;
     //Register Page
     case "/profile/register/":
     case "/profile/register":
