@@ -36,6 +36,8 @@ export async function setUpdateProfileListener() {
         storedProfile.avatar = updatedProfile.avatar;
         localStorage.setItem("profile", JSON.stringify(storedProfile));
 
+        console.log("Profil oppdatert suksessfullt!");
+        window.history.back();
         window.location.reload();
       } catch (error) {
         console.error("Feil ved oppdatering av profil:", error);

@@ -12001,4 +12001,8 @@ main {
   max-width: 500px; /* Juster denne verdien etter behov */
 }
 
+.edit-post-button {
+  width: 105px;
+}
+
 /*# sourceMappingURL=index.css.map */

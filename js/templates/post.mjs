@@ -52,7 +52,7 @@ export function postTemplate(postData) {
     // Opprett edit-knappen
     const editButton = document.createElement("button");
     editButton.type = "button";
-    editButton.classList.add("btn", "btn-warning"); // Bruker "btn-warning" klassen for styling
+    editButton.classList.add("btn", "btn-warning", "edit-post-button"); // Bruker "btn-warning" klassen for styling
     editButton.textContent = "Edit Post";
     editContainer.appendChild(editButton);
 
