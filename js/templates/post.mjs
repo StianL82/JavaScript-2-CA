@@ -1,6 +1,6 @@
 import { defaultAvatar, isValidURL } from "./updateUserData.mjs";
 import { removePost } from "../api/posts/delete.mjs";
-import { getLoggedInUser } from "../api/auth/login.mjs"; // Anta at du har en modul for å hente innlogget bruker
+import { getLoggedInUser } from "../api/auth/login.mjs";
 
 export function postTemplate(postData) {
   const { id, author } = postData;
@@ -219,11 +219,20 @@ export function postTemplate(postData) {
   thumbnailImage.alt = "Avatar from the logged in User";
   thumbnailDiv.appendChild(thumbnailImage);
 
+  //////author name////////////
+
   const authorName = author.name;
   const authorNameContainer = document.createElement("p");
-  authorNameContainer.classList.add("text-center", "text-danger", "mt-0");
+  authorNameContainer.classList.add(
+    "author-name",
+    "text-center",
+    "text-danger",
+    "mt-0"
+  );
   authorNameContainer.textContent = authorName; // Bruk forfatterens navn
   thumbnailColumn.appendChild(authorNameContainer);
+
+  ////////////////
 
   // Oppretter bodyColumn som vil inneholde innholdet for posten
   const bodyColumn = document.createElement("div");

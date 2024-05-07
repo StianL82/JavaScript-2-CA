@@ -202,3 +202,9 @@ main {
   color: #761313;
   margin-right: 8px;
 }
+
+.author-name{
+  font-weight: bold;
+  transition: transform 0.3s, filter 0.3s;
+  cursor: pointer;
+}
