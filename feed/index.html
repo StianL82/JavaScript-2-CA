@@ -46,7 +46,9 @@
               >
             </li>
             <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" href="../">Log Out</a></li>
+            <li>
+              <a class="dropdown-item" href="#" id="logoutButton">Log Out</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -196,8 +198,9 @@
             <div class="col-md-6 mb-4">
               <label for="sortBy" class="sr-only text-white">Sort by</label>
               <select id="sortBy" class="form-control text-black">
-                <option>Sort by Date</option>
-                <option>Sort by Popularity</option>
+                <option value="all">Show All Posts</option>
+                <option value="hasMedia">Posts with Media</option>
+                <option value="grumpyEmail">GrumpyBunch Users</option>
               </select>
             </div>
           </div>

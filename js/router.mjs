@@ -7,6 +7,8 @@ import * as components from "./components/index.mjs";
 const path = location.pathname;
 
 export async function router() {
+  handlers.setupLogoutButton();
+
   switch (path) {
     //Main Page
     case "/":
@@ -33,12 +35,15 @@ export async function router() {
     case "/feed/index.html":
       await templates.updateUserData();
       templates.renderPosts();
-      posts.getPosts().then(console.log);
-      profiles.getProfiles().then(console.log);
+      /*       posts.getPosts().then(console.log);
+      profiles.getProfiles().then(console.log); */
       handlers.setCreatePostFormListener();
       /*       handlers.handleDeletePost(); */
       components.openModal();
       components.setupSearchListener();
+      components.filterPosts();
+      components.updatePostDisplay();
+      components.setupSortListener();
       break;
     //Single Post Page
     case "/feed/post/":
@@ -78,12 +83,3 @@ export async function router() {
       console.log("404 - not found");
   }
 }
-
-/* document
-  .getElementById("openModalButton")
-  .addEventListener("click", function () {
-    var myModal = new bootstrap.Modal(
-      document.getElementById("staticBackdrop")
-    );
-    myModal.show();
-  }); */
