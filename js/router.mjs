@@ -40,6 +40,15 @@ export async function router() {
       components.openModal();
       components.setupSearchListener();
       break;
+    //Single Post Page
+    case "/feed/post/":
+    case "/feed/post":
+    case "/feed/post.html":
+    case "/feed/post/index.html":
+      templates.updateUserData();
+      const postId = window.location.pathname.split("/").pop(); // Henter ID fra URL
+      await templates.renderSinglePost(postId);
+      break;
     //Update Post Page
     case "/feed/edit/":
     case "/feed/edit":

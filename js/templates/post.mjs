@@ -22,7 +22,7 @@ export function postTemplate(postData) {
     post.appendChild(dropdownContainer);
 
     const dotsIcon = document.createElement("img");
-    dotsIcon.src = "../images/icon_dots.png";
+    dotsIcon.src = "/images/icon_dots.png";
     dotsIcon.classList.add("dropdown-toggle");
     dotsIcon.role = "button";
     dotsIcon.setAttribute("data-bs-toggle", "dropdown");
@@ -43,7 +43,7 @@ export function postTemplate(postData) {
     editItem.appendChild(editContainer);
 
     const editIcon = document.createElement("img");
-    editIcon.src = "../images/icon_edit.png";
+    editIcon.src = "/images/icon_edit.png";
     editIcon.alt = "Edit Post";
     editIcon.classList.add("img-fluid", "me-2");
     editIcon.style.maxHeight = "1rem";
@@ -73,7 +73,7 @@ export function postTemplate(postData) {
 
     // Opprett delete-ikonet
     const deleteIcon = document.createElement("img");
-    deleteIcon.src = "../images/icon_delete.png";
+    deleteIcon.src = "/images/icon_delete.png";
     deleteIcon.alt = "Delete Post";
     deleteIcon.classList.add("img-fluid", "me-2");
     deleteIcon.style.maxHeight = "1rem";
@@ -277,6 +277,10 @@ export function postTemplate(postData) {
     "m-2",
     "bg-custom-light-grey"
   );
+  contentDiv.style.cursor = "pointer"; // Gjør hele div klikkbar
+  contentDiv.addEventListener("click", () => {
+    window.location.href = `/feed/post/?id=${postData.id}`; // Omdiriger til single post side
+  });
   bodyColumn.appendChild(contentDiv);
 
   const title = document.createElement("h4");
@@ -340,7 +344,7 @@ export function postTemplate(postData) {
   commentDiv.appendChild(commentIconContainer);
 
   const commentIcon = document.createElement("img");
-  commentIcon.src = "../images/icon_comment.png";
+  commentIcon.src = "/images/icon_comment.png";
   commentIcon.classList.add("icon-small");
   commentIcon.alt = "comment icon";
   commentIconContainer.appendChild(commentIcon);
