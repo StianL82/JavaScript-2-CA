@@ -2,7 +2,15 @@ import { getPosts } from "../../js/api/posts/read.mjs";
 import { postTemplate } from "../templates/post.mjs";
 
 // E-postadresser som skal brukes for filtrering
-const emailsToUse = ["GrumpyTerron@noroff.no"];
+const emailsToUse = [
+  "GrumpyTerron@noroff.no",
+  "prettyInStink@noroff.no",
+  "angryone@noroff.no",
+  "SourWizard@noroff.no",
+  "BookwormBelle@noroff.no",
+  "FumingPhilosopher@noroff.no",
+  "AngryDogLady@noroff.no",
+];
 
 // Filtrer og vis posts basert på valgt kriterium
 export async function filterPosts(filterType = "all") {
