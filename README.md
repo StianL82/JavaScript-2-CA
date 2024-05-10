@@ -8,7 +8,7 @@ This was mye first meeting with CSS Frameworks 😄
 
 ## Visit the page at:
 
-[![GrumpyBunch](/images/readme/GrumpyBunch_logo.png)](https://stianl-css-frameworks-ca.netlify.app/)
+[![GrumpyBunch](/images/readme/GrumpyBunch_logo.png)](https://stianl-javascript2-ca.netlify.app/)
 
 ## Description
 
@@ -39,9 +39,7 @@ git clone git@github.com/StianL82/css-frameworks-ca.git
 ### Running
 
 To run the git version, you will have to use npm install and npm run dev.
-[Link to page](https://stianl-css-frameworks-ca.netlify.app/)
-
-(The live Netlify link only contains css and not JavaScript, as we haven't learned how to do this properly yet.)
+[Link to page](https://stianl-javascript2-ca.netlify.app/)
 
 ### Contributing
 

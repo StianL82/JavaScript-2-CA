@@ -63,7 +63,7 @@ li {
 
 .h1-logo {
   font-family: Bangers, Arial, Helvetica, sans-serif;
-  font-size: clamp(1.6rem, 5vw, 3rem); /* Bruk clamp for dynamisk fontstørrelse */
+  font-size: clamp(1.6rem, 5vw, 3rem); 
 }
 
 .welcome-text{
@@ -110,7 +110,7 @@ li {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0px 20px 20px 20px; /* Legg til ønsket margin */
+  margin: 0px 20px 20px 20px;
 }
 
 .post-image {
@@ -160,8 +160,8 @@ li {
 .sticky-nav {
   position: fixed;
   top: 0;
-  z-index: 1000; /* Høy verdi for å holde den over andre elementer */
-  width: 100%; /* Full bredde */
+  z-index: 1000;
+  width: 100%;
 }
 
 html,
@@ -179,7 +179,7 @@ body {
 }
 
 main {
-  flex: 1; /* Flexes to fill remaining space */
+  flex: 1;
 }
 
 .footer {
