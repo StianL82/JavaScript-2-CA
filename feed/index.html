@@ -12,8 +12,8 @@
     <script type="module" src="../js/index.mjs"></script>
     <link rel="icon" href="/images/profile_me_small.png" />
   </head>
-  <body class="bg-dark">
-    <nav class="navbar sticky-top navbar-expand-lg bg-danger">
+  <body class="bg-dark forFixedNav">
+    <nav class="navbar sticky-nav navbar-expand-lg bg-danger">
       <div class="container">
         <div class="brand-logo">
           <a class="navbar-brand" href="#">
@@ -207,6 +207,10 @@
 
           <div class="col-md-12 mb-4">
             <h3 class="text-white text-center mt-3">Latest Posts</h3>
+            <div class="loading-indicator">
+              <div class="spinner"></div>
+              <p>Loading...</p>
+            </div>
             <section id="postsList">
               <!-- Her rendrer du postene -->
               <!-- Modalen for sletting -->

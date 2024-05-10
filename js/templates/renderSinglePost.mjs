@@ -1,7 +1,9 @@
 import { getPost } from "../api/posts/read.mjs";
 import { postTemplate } from "./post.mjs";
+import * as components from "../components/index.mjs";
 
 export async function renderSinglePost() {
+  components.showLoadingIndicator();
   const urlParams = new URLSearchParams(window.location.search);
   const postId = urlParams.get("id"); // Henter ID fra spørrestrengen
 
@@ -19,5 +21,7 @@ export async function renderSinglePost() {
     postContainer.appendChild(postElement);
   } catch (error) {
     console.error("Error fetching post:", error);
+  } finally {
+    components.hideLoadingIndicator();
   }
 }
