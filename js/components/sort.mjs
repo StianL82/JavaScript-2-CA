@@ -54,7 +54,17 @@ export function updatePostDisplay(filteredPosts) {
       postContainer.appendChild(postElement);
     });
   } else {
-    postContainer.innerHTML = "<p>No posts to display.</p>";
+    const noPostsMessage = document.createElement("h4");
+    noPostsMessage.classList.add(
+      "no-posts",
+      "text-center",
+      "bg-info",
+      "p-3",
+      "text-black",
+      "rounded-2"
+    );
+    noPostsMessage.textContent = "No posts to display.";
+    postContainer.appendChild(noPostsMessage);
   }
 }
 

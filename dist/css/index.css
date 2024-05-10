@@ -11933,14 +11933,14 @@ li {
 }
 
 .icon {
-  max-width: 50px;
-  max-height: 50px;
-}
-
-.icon-small {
   max-width: 30px;
   max-height: 30px;
-  transition: transform 0.3s, filter 0.3s;
+}
+
+.icon-transform {
+  max-width: 30px;
+  max-height: 30px;
+  /*   transition: transform 0.3s, filter 0.3s; */
   cursor: pointer;
 }
 
@@ -11949,7 +11949,7 @@ li {
   max-height: 20px;
 }
 
-.icon-small:hover {
+.icon-transform:hover {
   transform: scale(1.1);
 }
 

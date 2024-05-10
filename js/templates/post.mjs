@@ -329,25 +329,57 @@ export function postTemplate(postData) {
     });
   }
 
+  // Først lager vi den overordnede containeren
+  const detailsDiv = document.createElement("div");
+  detailsDiv.classList.add(
+    "d-flex",
+    "justify-content-between",
+    "align-items-center",
+    "mt-2"
+  );
+
+  // Opprett reactionDiv og legg til innhold
+  const reactionDiv = document.createElement("div");
+  reactionDiv.classList.add("d-flex", "align-items-center", "gap-2");
+
+  const reactionIcon = document.createElement("img");
+  reactionIcon.src = "/images/icon_crap.png"; // Endre ikonbanen etter behov
+  reactionIcon.classList.add("icon", "ms-2");
+  reactionIcon.alt = "reaction icon";
+  reactionDiv.appendChild(reactionIcon);
+
+  const reactionCount = document.createElement("span");
+  reactionCount.classList.add("fw-bold", "text-danger");
+  reactionCount.textContent = postData._count.reactions; // Antar at postData er tilgjengelig med reaksjonsdata
+  reactionDiv.appendChild(reactionCount);
+
+  // Legger reactionDiv til i detailsDiv
+  detailsDiv.appendChild(reactionDiv);
+
+  // commentDiv, allerede definert fra din kode
   const commentDiv = document.createElement("div");
   commentDiv.classList.add(
     "d-flex",
     "justify-content-end",
     "gap-4",
     "me-3",
-    "mt-2",
     "align-items-center"
   );
-  bodyColumn.appendChild(commentDiv);
 
   const commentIconContainer = document.createElement("div");
   commentDiv.appendChild(commentIconContainer);
 
   const commentIcon = document.createElement("img");
   commentIcon.src = "/images/icon_comment.png";
-  commentIcon.classList.add("icon-small");
+  commentIcon.classList.add("icon");
   commentIcon.alt = "comment icon";
   commentIconContainer.appendChild(commentIcon);
+
+  // Legger commentDiv til i detailsDiv
+  detailsDiv.appendChild(commentDiv);
+
+  // Til slutt legger vi til detailsDiv i bodyColumn eller tilsvarende element
+  bodyColumn.appendChild(detailsDiv);
 
   return post;
 }
