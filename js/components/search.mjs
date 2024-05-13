@@ -1,8 +1,6 @@
 import * as postMethods from "../api/posts/index.mjs";
 import { postTemplate } from "../templates/post.mjs";
 
-let debounceTimer;
-
 export async function searchPosts(query) {
   const posts = await postMethods.getPosts();
   const filteredPosts = posts.filter(
@@ -19,18 +17,5 @@ export async function searchPosts(query) {
   filteredPosts.forEach((post) => {
     const postElement = postTemplate(post);
     container.appendChild(postElement);
-  });
-}
-
-export function setupSearchListener() {
-  const searchInput = document.querySelector("#searchInput");
-
-  searchInput.value = "";
-
-  searchInput.addEventListener("input", (event) => {
-    clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(() => {
-      searchPosts(event.target.value);
-    }, 1000);
   });
 }

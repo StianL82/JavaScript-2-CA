@@ -1,7 +1,7 @@
 import { getPosts } from "../../js/api/posts/read.mjs";
-import { postTemplate } from "../templates/post.mjs";
+import { updateSortDisplay } from "../handlers/updateSortDisplay.mjs";
 
-// E-postadresser som skal brukes for filtrering
+// Sort option that uses specific emails to replicate a post-feed for just GrumpyBunch users, a tip I got from Martin.
 const emailsToUse = [
   "GrumpyTerron@noroff.no",
   "prettyInStink@noroff.no",
@@ -12,7 +12,6 @@ const emailsToUse = [
   "AngryDogLady@noroff.no",
 ];
 
-// Filtrer og vis posts basert på valgt kriterium
 export async function filterPosts(filterType = "all") {
   const posts = await getPosts();
   let filteredPosts = [];
@@ -39,50 +38,5 @@ export async function filterPosts(filterType = "all") {
     console.error("Posts is not an array:", posts);
   }
 
-  updatePostDisplay(filteredPosts);
-}
-
-// Oppdaterer post-listen basert på filtrering
-export function updatePostDisplay(filteredPosts) {
-  console.log("Updating post display with filtered posts:", filteredPosts);
-  const postContainer = document.querySelector("#postsList");
-  postContainer.innerHTML = "";
-
-  if (filteredPosts && filteredPosts.length > 0) {
-    filteredPosts.forEach((postData) => {
-      const postElement = postTemplate(postData);
-      postContainer.appendChild(postElement);
-    });
-  } else {
-    const noPostsMessage = document.createElement("h4");
-    noPostsMessage.classList.add(
-      "no-posts",
-      "text-center",
-      "bg-info",
-      "p-3",
-      "text-black",
-      "rounded-2"
-    );
-    noPostsMessage.textContent = "No posts to display.";
-    postContainer.appendChild(noPostsMessage);
-  }
-}
-
-// Setup sort listener function
-export function setupSortListener() {
-  document.addEventListener("DOMContentLoaded", () => {
-    // Få tak i dropdown elementet
-    const sortBy = document.getElementById("sortBy");
-
-    // Sett verdien til 'all'
-    if (sortBy) {
-      sortBy.value = "all";
-      sortBy.addEventListener("change", () => {
-        console.log("Sort by changed. New value:", sortBy.value);
-        filterPosts(sortBy.value);
-      });
-    } else {
-      console.error("Sort by element not found.");
-    }
-  });
+  updateSortDisplay(filteredPosts);
 }

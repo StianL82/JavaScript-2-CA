@@ -7,9 +7,9 @@ export async function renderUserPosts() {
   const container = document.querySelector(".userPosts");
 
   try {
-    const posts = await getUserPosts(); // Forsøker å hente brukerinnlegg
+    const posts = await getUserPosts();
 
-    container.innerHTML = ""; // Tømmer eksisterende innhold først i try blokken for å håndtere feil som kan skje ved henting
+    container.innerHTML = "";
 
     if (posts.length > 0) {
       posts.forEach((post) => {
@@ -35,7 +35,7 @@ export async function renderUserPosts() {
     }
   } catch (error) {
     console.error("Failed to render user posts:", error);
-    container.innerHTML = ""; // Tømmer eventuelt eksisterende innhold i tilfelle feil
+    container.innerHTML = "";
     const errorContainer = document.createElement("div");
     errorContainer.textContent = "Error loading posts. Please try again later.";
     errorContainer.classList.add("alert", "alert-danger", "text-center");

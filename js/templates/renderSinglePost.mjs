@@ -5,7 +5,7 @@ import * as components from "../components/index.mjs";
 export async function renderSinglePost() {
   components.showLoadingIndicator();
   const urlParams = new URLSearchParams(window.location.search);
-  const postId = urlParams.get("id"); // Henter ID fra spørrestrengen
+  const postId = urlParams.get("id");
 
   if (!postId) {
     console.error("No post ID provided!");
@@ -14,7 +14,7 @@ export async function renderSinglePost() {
 
   try {
     const postData = await getPost(postId);
-    console.log(postData); // Logg postData for å se strukturen
+    console.log(postData);
     const postContainer = document.querySelector("#display-single-post");
     const postElement = postTemplate(postData);
     postContainer.innerHTML = "";

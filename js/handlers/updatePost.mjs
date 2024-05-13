@@ -23,7 +23,7 @@ export async function setUpdatePostFormListener() {
       event.preventDefault();
       const formData = new FormData(form);
       const post = {
-        id: id, // Sørg for at denne ID-en hentes korrekt og er gyldig
+        id: id,
       };
 
       for (let [key, value] of formData.entries()) {
@@ -37,8 +37,8 @@ export async function setUpdatePostFormListener() {
           console.log("Post updated successfully!");
           const returnUrl =
             sessionStorage.getItem("returnUrl") || "/defaultPath";
-          sessionStorage.removeItem("returnUrl"); // Fjern brukte data fra sessionStorage
-          window.location.href = returnUrl + "?updated=true"; // Naviger tilbake med oppdateringsparameter
+          sessionStorage.removeItem("returnUrl");
+          window.location.href = returnUrl + "?updated=true";
         }
       } catch (error) {
         console.error("Error updating post:", error);

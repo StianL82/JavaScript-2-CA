@@ -1,24 +1,11 @@
 import { API_SOCIAL_URL } from "../constants.mjs";
 import * as storage from "../../storage/index.mjs";
+import * as components from "../../components/index.mjs";
 
 const action = "/auth/login";
 const method = "post";
 
-// Funksjon for å hydrere e-postfeltet på innloggingssiden
-function hydrateEmailField() {
-  document.addEventListener("DOMContentLoaded", function () {
-    const emailInput = document.getElementById("email");
-    const storedEmail = sessionStorage.getItem("userEmail");
-
-    if (emailInput && storedEmail) {
-      emailInput.value = storedEmail; // Sett den lagrede e-postadressen i skjemaet
-      sessionStorage.removeItem("userEmail"); // Fjern e-postadressen fra sessionStorage etter den er brukt
-    }
-  });
-}
-
-// Kall hydrateEmailField for å sikre at den kjøres ved siden lasting
-hydrateEmailField();
+components.hydrateEmailField();
 
 export async function login(profile) {
   const loginURL = API_SOCIAL_URL + action;
@@ -48,15 +35,5 @@ export async function login(profile) {
     alert(
       "Network error. Please check your internet connection and try again."
     );
-  }
-}
-
-export function getLoggedInUser() {
-  const accessToken = storage.load("token");
-  const userProfile = storage.load("profile");
-  if (accessToken && userProfile) {
-    return userProfile;
-  } else {
-    return null;
   }
 }

@@ -1,6 +1,7 @@
-import { defaultAvatar, isValidURL } from "./updateUserData.mjs";
+import { defaultAvatar } from "../handlers/updateAvatar.mjs";
 import { removePost } from "../api/posts/delete.mjs";
-import { getLoggedInUser } from "../api/auth/login.mjs";
+import { getLoggedInUser } from "../components/getLoggedInUser.mjs";
+import { isValidURL } from "../components/validURL.mjs";
 
 export function postTemplate(postData) {
   const { id, author } = postData;

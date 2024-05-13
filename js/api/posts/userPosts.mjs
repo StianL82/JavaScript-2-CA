@@ -1,5 +1,5 @@
 import { API_SOCIAL_URL } from "../constants.mjs";
-import { getLoggedInUser } from "../auth/login.mjs";
+import { getLoggedInUser } from "../../components/getLoggedInUser.mjs";
 import { authFetch } from "../authFetch.mjs";
 
 const action = "/posts";

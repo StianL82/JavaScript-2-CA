@@ -1,24 +1,13 @@
-import { getUserPosts } from "../api/posts/userPosts.mjs";
-
-async function countUserPosts() {
-  try {
-    // Anta at `getUserPosts` returnerer en liste med alle postene
-    const posts = await getUserPosts();
-    return posts.length; // Returnerer antallet posts
-  } catch (error) {
-    console.error("Failed to load user posts:", error);
-    return 0; // Returnerer 0 hvis det er en feil
-  }
-}
+import { countUserPosts } from "../components/countUserPosts.mjs";
 
 async function updateUserPostsCount() {
-  const postsCount = await countUserPosts(); // Hent antall posts
+  const postsCount = await countUserPosts();
   const postsCountElement = document.querySelector(".user-posts-count");
   if (postsCountElement) {
-    postsCountElement.textContent = `${postsCount} Posts`; // Oppdater tekst
+    postsCountElement.textContent = `${postsCount} Posts`;
   }
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  updateUserPostsCount(); // Oppdater posttelleren når siden lastes
+  updateUserPostsCount();
 });

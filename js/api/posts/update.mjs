@@ -17,13 +17,12 @@ export async function updatePost(postData) {
     });
 
     if (!response.ok) {
-      // Kaster en feil hvis responsen fra serveren ikke er 'ok' (statuskode 200-299)
       throw new Error(`Failed to update the post, status: ${response.status}`);
     }
 
-    return await response.json(); // Returnerer JSON-responsen hvis alt er ok
+    return await response.json();
   } catch (error) {
     console.error("Error in updatePost:", error);
-    throw error; // Kaster feilen videre slik at den kan fanges opp av kalleren
+    throw error;
   }
 }

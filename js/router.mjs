@@ -39,11 +39,10 @@ export async function router() {
       profiles.getProfiles().then(console.log); */
       handlers.setCreatePostFormListener();
       /*       handlers.handleDeletePost(); */
-      components.openModal();
-      components.setupSearchListener();
+      handlers.setupSearchListener();
       components.filterPosts();
-      components.updatePostDisplay();
-      components.setupSortListener();
+      handlers.updateSortDisplay();
+      handlers.setupSortListener();
       break;
     //Single Post Page
     case "/feed/post/":
