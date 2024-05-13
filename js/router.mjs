@@ -1,7 +1,5 @@
 import * as templates from "./templates/index.mjs";
 import * as handlers from "./handlers/index.mjs";
-import * as posts from "./api/posts/index.mjs";
-import * as profiles from "./api/profiles/index.mjs";
 import * as components from "./components/index.mjs";
 
 const path = location.pathname;
@@ -35,10 +33,7 @@ export async function router() {
     case "/feed/index.html":
       await templates.updateUserData();
       templates.renderPosts();
-      /*       posts.getPosts().then(console.log);
-      profiles.getProfiles().then(console.log); */
       handlers.setCreatePostFormListener();
-      /*       handlers.handleDeletePost(); */
       handlers.setupSearchListener();
       components.filterPosts();
       handlers.updateSortDisplay();
@@ -50,7 +45,7 @@ export async function router() {
     case "/feed/post.html":
     case "/feed/post/index.html":
       templates.updateUserData();
-      const postId = window.location.pathname.split("/").pop(); // Henter ID fra URL
+      const postId = window.location.pathname.split("/").pop();
       await templates.renderSinglePost(postId);
       break;
     //Update Post Page

@@ -1,3 +1,5 @@
+import { searchPosts } from "../components/search.mjs";
+
 let debounceTimer;
 
 export function setupSearchListener() {

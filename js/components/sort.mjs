@@ -1,7 +1,7 @@
-import { getPosts } from "../../js/api/posts/read.mjs";
+import { getPosts } from "../api/posts/getPosts.mjs";
 import { updateSortDisplay } from "../handlers/updateSortDisplay.mjs";
 
-// Sort option that uses specific emails to replicate a post-feed for just GrumpyBunch users, a tip I got from Martin.
+// Sort option that uses specific emails to replicate a post-feed for just GrumpyBunch users, a tip I got from our teacher Martin.
 const emailsToUse = [
   "GrumpyTerron@noroff.no",
   "prettyInStink@noroff.no",

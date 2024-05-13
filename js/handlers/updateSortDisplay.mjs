@@ -1,7 +1,6 @@
 import { postTemplate } from "../templates/post.mjs";
 
 export function updateSortDisplay(filteredPosts) {
-  console.log("Updating post display with filtered posts:", filteredPosts);
   const postContainer = document.querySelector("#postsList");
   postContainer.innerHTML = "";
 

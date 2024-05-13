@@ -10,6 +10,6 @@ export function updateUsername() {
       element.textContent = userData.name;
     });
   } else {
-    console.error("Brukernavn ikke tilgjengelig");
+    console.error("Username not available");
   }
 }

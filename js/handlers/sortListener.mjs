@@ -7,7 +7,6 @@ export function setupSortListener() {
     if (sortBy) {
       sortBy.value = "all";
       sortBy.addEventListener("change", () => {
-        console.log("Sort by changed. New value:", sortBy.value);
         filterPosts(sortBy.value);
       });
     } else {

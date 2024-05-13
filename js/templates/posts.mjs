@@ -11,9 +11,8 @@ export async function renderPosts() {
     renderPostTemplates(posts, container);
   } catch (error) {
     console.error("Failed to load posts:", error);
-    container.innerHTML =
-      '<div class="alert alert-danger">Unable to load posts. Please try again later.</div>';
-  } finally {
-    console.log("Attempt to render posts has completed.");
+    const alertDiv = document.createElement("div");
+    alertDiv.className = "alert alert-danger";
+    alertDiv.textContent = "Unable to load posts. Please try again later.";
   }
 }

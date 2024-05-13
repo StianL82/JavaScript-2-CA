@@ -1,4 +1,4 @@
-import { getPost } from "../api/posts/read.mjs";
+import { getPost } from "../api/posts/getPost.mjs";
 import { postTemplate } from "./post.mjs";
 import * as components from "../components/index.mjs";
 
@@ -14,7 +14,6 @@ export async function renderSinglePost() {
 
   try {
     const postData = await getPost(postId);
-    console.log(postData);
     const postContainer = document.querySelector("#display-single-post");
     const postElement = postTemplate(postData);
     postContainer.innerHTML = "";

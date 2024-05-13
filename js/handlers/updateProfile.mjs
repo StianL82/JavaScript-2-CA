@@ -36,11 +36,11 @@ export async function setUpdateProfileListener() {
         storedProfile.avatar = updatedProfile.avatar;
         localStorage.setItem("profile", JSON.stringify(storedProfile));
 
-        console.log("Profil oppdatert suksessfullt!");
+        console.log("Profile updated successfully!");
         window.history.back();
         window.location.reload();
       } catch (error) {
-        console.error("Feil ved oppdatering av profil:", error);
+        console.error("Error when updating profile:", error);
       }
     });
   }
