@@ -4,8 +4,13 @@ import { authFetch } from "../authFetch.mjs";
 const action = "/profiles";
 
 export async function getProfiles() {
-  const getProfilesURL = `${API_SOCIAL_URL}${action}`;
-  const response = await authFetch(getProfilesURL);
+  try {
+    const getProfilesURL = `${API_SOCIAL_URL}${action}`;
+    const response = await authFetch(getProfilesURL);
 
-  return await response.json();
+    return await response.json();
+  } catch (error) {
+    console.error("An error occurred while fetching profiles:", error);
+    throw error;
+  }
 }

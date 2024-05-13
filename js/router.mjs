@@ -22,14 +22,12 @@ export async function router() {
     //Login Page
     case "/profile/login/":
     case "/profile/login":
-    case "/profile/login.html":
     case "/profile/login/index.html":
       handlers.setLoginFormListener();
       break;
     //FeedPage
     case "/feed/":
     case "/feed":
-    case "/feed.html":
     case "/feed/index.html":
       await templates.updateUserData();
       templates.renderPosts();
@@ -42,7 +40,6 @@ export async function router() {
     //Single Post Page
     case "/feed/post/":
     case "/feed/post":
-    case "/feed/post.html":
     case "/feed/post/index.html":
       templates.updateUserData();
       const postId = window.location.pathname.split("/").pop();
@@ -52,14 +49,12 @@ export async function router() {
     case "/feed/edit/":
     case "/feed/edit":
     case "/feed/edit.html":
-    case "/feed/edit.html":
       await templates.updateUserData();
       handlers.setUpdatePostFormListener();
       break;
     //Profile Page
     case "/profile/":
     case "/profile":
-    case "/profile.html":
     case "/profile/index.html":
       await templates.updateUserData();
       templates.renderUserPosts();
@@ -67,7 +62,6 @@ export async function router() {
     //Profile Edit
     case "/profile/edit/":
     case "/profile/edit":
-    case "/profile/edit.html":
     case "/profile/edit/index.html":
       await templates.updateUserData();
       handlers.setUpdateProfileListener();

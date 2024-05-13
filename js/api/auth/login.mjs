@@ -27,7 +27,7 @@ export async function login(profile) {
       window.location.href = "../../../feed/";
     } else {
       alert(
-        "Login failed. Please check your that your email or password is correct."
+        "Login failed. Please check that your email or password is correct."
       );
     }
   } catch (error) {

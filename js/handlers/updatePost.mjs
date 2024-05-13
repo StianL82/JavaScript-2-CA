@@ -34,7 +34,6 @@ export async function setUpdatePostFormListener() {
       try {
         const result = await updatePost(post);
         if (result) {
-          console.log("Post updated successfully!");
           const returnUrl =
             sessionStorage.getItem("returnUrl") || "/defaultPath";
           sessionStorage.removeItem("returnUrl");

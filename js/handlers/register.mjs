@@ -11,7 +11,6 @@ export function setRegisterFormListener() {
       const profile = Object.fromEntries(formData.entries());
 
       register(profile);
-      console.log(profile);
     });
   }
 }

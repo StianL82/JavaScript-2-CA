@@ -5,16 +5,19 @@ const action = "/posts";
 const method = "delete";
 
 export async function removePost(id) {
-  const removePostURL = `${API_SOCIAL_URL}${action}/${id}`;
-  const response = await authFetch(removePostURL, {
-    method,
-  });
+  try {
+    const removePostURL = `${API_SOCIAL_URL}${action}/${id}`;
+    const response = await authFetch(removePostURL, {
+      method,
+    });
 
-  console.log("API Response:", response);
+    if (!response.ok) {
+      throw new Error("Failed to delete post: " + (await response.text()));
+    }
 
-  if (!response.ok) {
-    throw new Error("Failed to delete post: " + (await response.text()));
+    return response.status;
+  } catch (error) {
+    console.error("An error occurred while deleting the post:", error);
+    throw error;
   }
-
-  return response.status;
 }
