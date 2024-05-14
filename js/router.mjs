@@ -79,6 +79,7 @@ export async function router() {
       requireAuth();
       await templates.updateUserData();
       templates.renderUserPosts();
+      handlers.updateFollowerCount();
       break;
     //Profile Edit
     case "/profile/edit/":

@@ -8,3 +8,4 @@ export * from "./displayPostCount.mjs";
 export * from "./searchListener.mjs";
 export * from "./sortListener.mjs";
 export * from "./updateSortDisplay.mjs";
+export * from "./followerCount.mjs";
