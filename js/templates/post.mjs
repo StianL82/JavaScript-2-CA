@@ -2,16 +2,18 @@ import { defaultAvatar } from "../handlers/updateAvatar.mjs";
 import { removePost } from "../api/posts/delete.mjs";
 import { getLoggedInUser } from "../components/getLoggedInUser.mjs";
 import { isValidURL } from "../components/validURL.mjs";
+import { addEditButtonListener } from "../handlers/editButtonListener.mjs";
+import { addDeleteButtonListener } from "../handlers/deleteButtonListener.mjs";
+import { addConfirmDeleteListener } from "../handlers/confirmDeleteListener.mjs";
 
 export function postTemplate(postData) {
   const { id, author } = postData;
-  const loggedInUser = getLoggedInUser(); // Hent innlogget bruker
-  const isAuthorLoggedIn = loggedInUser && loggedInUser.name === author.name; // Sjekk om innlogget bruker er forfatteren av posten basert på navn
+  const loggedInUser = getLoggedInUser();
+  const isAuthorLoggedIn = loggedInUser && loggedInUser.name === author.name;
 
   const post = document.createElement("div");
   post.classList.add("card", "mb-4", "bg-info", "text-black");
 
-  // Opprett dropdown-container og dropdown-knapp bare hvis innlogget bruker er forfatteren
   if (isAuthorLoggedIn) {
     const dropdownContainer = document.createElement("div");
     dropdownContainer.classList.add(
@@ -50,29 +52,22 @@ export function postTemplate(postData) {
     editIcon.style.maxHeight = "1rem";
     editContainer.appendChild(editIcon);
 
-    // Opprett edit-knappen
     const editButton = document.createElement("button");
     editButton.type = "button";
-    editButton.classList.add("btn", "btn-warning", "edit-post-button"); // Bruker "btn-warning" klassen for styling
+    editButton.classList.add("btn", "btn-warning", "edit-post-button");
     editButton.textContent = "Edit Post";
     editContainer.appendChild(editButton);
 
-    // Legg til en klikk-event handler for å omdirigere til redigeringssiden med postens ID
-    editButton.addEventListener("click", () => {
-      sessionStorage.setItem("returnUrl", window.location.href);
-      window.location.href = `/feed/edit/?id=${postData.id}`; // Bruker "id" som URL-parameter for konsistens med form listener
-    });
+    addEditButtonListener(editButton, postData);
 
     const deleteItem = document.createElement("li");
     deleteItem.classList.add("d-flex");
     dropdownMenu.appendChild(deleteItem);
 
-    // Opprett en ny div for knappen
     const deleteButtonContainer = document.createElement("div");
     deleteButtonContainer.classList.add("d-flex", "align-items-center", "m-2");
     deleteItem.appendChild(deleteButtonContainer);
 
-    // Opprett delete-ikonet
     const deleteIcon = document.createElement("img");
     deleteIcon.src = "/images/icon_delete.png";
     deleteIcon.alt = "Delete Post";
@@ -80,14 +75,12 @@ export function postTemplate(postData) {
     deleteIcon.style.maxHeight = "1rem";
     deleteButtonContainer.appendChild(deleteIcon);
 
-    // Opprett delete-knappen
     const deleteButton = document.createElement("button");
     deleteButton.type = "button";
-    deleteButton.classList.add("btn", "btn-primary", "open-modal-button"); // Legg til "open-modal-button" klassen
+    deleteButton.classList.add("btn", "btn-primary", "open-modal-button");
     deleteButton.textContent = "Delete Post";
     deleteButtonContainer.appendChild(deleteButton);
 
-    // Opprett bekreftelsesmodalen
     const modal = document.createElement("div");
     modal.classList.add("modal", "fade", "staticBackdrop");
     modal.setAttribute("data-bs-backdrop", "static");
@@ -102,7 +95,6 @@ export function postTemplate(postData) {
     const modalContent = document.createElement("div");
     modalContent.classList.add("modal-content");
 
-    // Innholdet i modalen
     const modalHeader = document.createElement("div");
     modalHeader.classList.add("modal-header");
     const modalTitle = document.createElement("h1");
@@ -143,45 +135,11 @@ export function postTemplate(postData) {
     modalContent.appendChild(modalFooter);
     modalDialog.appendChild(modalContent);
     modal.appendChild(modalDialog);
-    post.appendChild(modal); // Legg til modalen i posten
+    post.appendChild(modal);
 
-    // Legg til en hendelseslytter på slettingsknappen
-    deleteButton.addEventListener("click", function () {
-      const postId = id; // Dette skal være ID-en fra postdata
-      const confirmDeleteButton = modal.querySelector(".confirm-delete-button");
-      confirmDeleteButton.dataset.postId = postId; // Sett post-ID som en attributt på bekreftelsesknappen
-
-      // Vis modalen
-      var myModal = new bootstrap.Modal(modal);
-      myModal.show();
-    });
-
-    // Det er viktig at denne koden ligger utenfor "click" event for deleteButton, slik at den ikke legger til flere lyttere
-    modal.querySelector(".confirm-delete-button").addEventListener(
-      "click",
-      async function () {
-        const postId = this.dataset.postId; // Hent post-ID fra data-attributt
-        try {
-          const status = await removePost(postId);
-          if (status === 200) {
-            // Endre fra 204 til 200 siden dette er statuskoden du får
-            let myModal = bootstrap.Modal.getInstance(modal);
-            myModal.hide(); // Lukker modalen
-            post.remove(); // Fjerner postelementet fra UI
-            alert("Post deleted successfully!");
-          } else {
-            alert("Failed to delete post");
-          }
-        } catch (error) {
-          console.error("Deletion error:", error);
-          alert("Error: " + (error.message || "Unknown error"));
-        }
-      },
-      { once: true } // Sørger for at hendelsen kun håndteres én gang
-    );
+    addDeleteButtonListener(deleteButton, modal, id);
+    addConfirmDeleteListener(modal, removePost, post);
   }
-
-  //////////////////////////////////////////////
 
   const rowDiv = document.createElement("div");
   rowDiv.classList.add("row");
@@ -204,12 +162,9 @@ export function postTemplate(postData) {
   const thumbnailDiv = document.createElement("div");
   thumbnailColumn.appendChild(thumbnailDiv);
 
-  /////////////////////// her må jeg få lagt inn korrekt avatar og name
-
   const authorAvatar = author.avatar;
   const thumbnailImage = document.createElement("img");
 
-  // Sjekk om forfatterens avatar er tomt, hvis det er tilfelle, bruk defaultAvatar
   if (authorAvatar === "" || !isValidURL(authorAvatar)) {
     thumbnailImage.src = defaultAvatar;
   } else {
@@ -220,8 +175,6 @@ export function postTemplate(postData) {
   thumbnailImage.alt = "Avatar from the logged in User";
   thumbnailDiv.appendChild(thumbnailImage);
 
-  //////author name////////////
-
   const authorName = author.name;
   const authorNameContainer = document.createElement("p");
   authorNameContainer.classList.add(
@@ -230,12 +183,9 @@ export function postTemplate(postData) {
     "text-danger",
     "mt-0"
   );
-  authorNameContainer.textContent = authorName; // Bruk forfatterens navn
+  authorNameContainer.textContent = authorName;
   thumbnailColumn.appendChild(authorNameContainer);
 
-  ////////////////
-
-  // Oppretter bodyColumn som vil inneholde innholdet for posten
   const bodyColumn = document.createElement("div");
   bodyColumn.classList.add(
     "card-body",
@@ -247,13 +197,9 @@ export function postTemplate(postData) {
   );
   rowDiv.appendChild(bodyColumn);
 
-  ////DATO/////
-
-  // Oppretter en ny div for å vise datoen
   const dateDiv = document.createElement("div");
   dateDiv.classList.add("date-info", "mb-2", "ms-2");
 
-  // Formatterer datoene fra APIen
   const createdDate = new Date(postData.created);
   const dateFormatter = new Intl.DateTimeFormat("en-US", {
     dateStyle: "medium",
@@ -265,10 +211,8 @@ export function postTemplate(postData) {
     dateDiv.textContent += ` | Updated: ${dateFormatter.format(updatedDate)}`;
   }
 
-  // Legger datoen til i bodyColumn før contentDiv
   bodyColumn.appendChild(dateDiv);
 
-  // Oppretter contentDiv som vil holde på selve innholdet og datoen
   const contentDiv = document.createElement("div");
   contentDiv.classList.add(
     "d-flex-column",
@@ -278,9 +222,9 @@ export function postTemplate(postData) {
     "m-2",
     "bg-custom-light-grey"
   );
-  contentDiv.style.cursor = "pointer"; // Gjør hele div klikkbar
+  contentDiv.style.cursor = "pointer";
   contentDiv.addEventListener("click", () => {
-    window.location.href = `/feed/post/?id=${postData.id}`; // Omdiriger til single post side
+    window.location.href = `/feed/post/?id=${postData.id}`;
   });
   bodyColumn.appendChild(contentDiv);
 
@@ -296,41 +240,38 @@ export function postTemplate(postData) {
 
   if (postData.media) {
     const imgContainer = document.createElement("div");
-    imgContainer.classList.add("post-image-container"); // Legg til klassen for bildet container
+    imgContainer.classList.add("post-image-container");
     contentDiv.appendChild(imgContainer);
 
     const img = document.createElement("img");
     img.src = postData.media;
     img.alt = `Image from ${postData.title}`;
-    img.classList.add("post-image"); // Legg til klassen for bildet
-    imgContainer.appendChild(img); // Legg til bildet i imgContainer
+    img.classList.add("post-image");
+    imgContainer.appendChild(img);
   }
 
-  // Sjekk om det finnes tags og opprett en container for dem
   if (postData.tags && postData.tags.length > 0) {
     const tagsContainer = document.createElement("div");
     tagsContainer.classList.add(
       "d-flex",
-      "flex-wrap", // Legger til wrapping
+      "flex-wrap",
       "justify-content-start",
       "gap-2",
       "ms-2"
     );
     contentDiv.appendChild(tagsContainer);
 
-    // Iterer gjennom hver tag og opprett et span-element for hver
     postData.tags.forEach((tag) => {
       if (tag) {
-        // Sørg for at taggen ikke er en tom streng
         const tagElement = document.createElement("span");
-        tagElement.classList.add("tag"); // Oppdater klassenavnet til "tag"
-        tagElement.textContent = `#${tag}`; // Legger til # foran taggen
+        tagElement.classList.add("tag");
+        ("tag");
+        tagElement.textContent = `#${tag}`;
         tagsContainer.appendChild(tagElement);
       }
     });
   }
 
-  // Først lager vi den overordnede containeren
   const detailsDiv = document.createElement("div");
   detailsDiv.classList.add(
     "d-flex",
@@ -339,25 +280,22 @@ export function postTemplate(postData) {
     "mt-2"
   );
 
-  // Opprett reactionDiv og legg til innhold
   const reactionDiv = document.createElement("div");
   reactionDiv.classList.add("d-flex", "align-items-center", "gap-2");
 
   const reactionIcon = document.createElement("img");
-  reactionIcon.src = "/images/icon_crap.png"; // Endre ikonbanen etter behov
+  reactionIcon.src = "/images/icon_crap.png";
   reactionIcon.classList.add("icon", "ms-2");
   reactionIcon.alt = "reaction icon";
   reactionDiv.appendChild(reactionIcon);
 
   const reactionCount = document.createElement("span");
   reactionCount.classList.add("fw-bold", "text-danger");
-  reactionCount.textContent = postData._count.reactions; // Antar at postData er tilgjengelig med reaksjonsdata
+  reactionCount.textContent = postData._count.reactions;
   reactionDiv.appendChild(reactionCount);
 
-  // Legger reactionDiv til i detailsDiv
   detailsDiv.appendChild(reactionDiv);
 
-  // commentDiv, allerede definert fra din kode
   const commentDiv = document.createElement("div");
   commentDiv.classList.add(
     "d-flex",
@@ -376,15 +314,9 @@ export function postTemplate(postData) {
   commentIcon.alt = "comment icon";
   commentIconContainer.appendChild(commentIcon);
 
-  // Legger commentDiv til i detailsDiv
   detailsDiv.appendChild(commentDiv);
 
-  // Til slutt legger vi til detailsDiv i bodyColumn eller tilsvarende element
   bodyColumn.appendChild(detailsDiv);
 
   return post;
-}
-
-export function renderPostTemplate(postData, parent) {
-  parent.append(postTemplate(postData));
 }
