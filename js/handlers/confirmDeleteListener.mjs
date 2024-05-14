@@ -1,3 +1,5 @@
+import { updateUserPostsCount } from "../handlers/displayPostCount.mjs";
+
 export function addConfirmDeleteListener(modal, removePost, post) {
   modal.querySelector(".confirm-delete-button").addEventListener(
     "click",
@@ -11,7 +13,7 @@ export function addConfirmDeleteListener(modal, removePost, post) {
           post.remove();
           sessionStorage.setItem("postDeleted", "true");
           alert("Post deleted successfully!");
-          updateUserPostCount();
+          await updateUserPostsCount();
         } else {
           alert("Failed to delete post");
         }
@@ -23,3 +25,7 @@ export function addConfirmDeleteListener(modal, removePost, post) {
     { once: true }
   );
 }
+
+document.addEventListener("DOMContentLoaded", async () => {
+  await updateUserPostsCount();
+});

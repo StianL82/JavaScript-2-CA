@@ -1,6 +1,6 @@
 import { countUserPosts } from "../components/countUserPosts.mjs";
 
-async function updateUserPostsCount() {
+export async function updateUserPostsCount() {
   const postsCount = await countUserPosts();
   const postsCountElement = document.querySelector(".user-posts-count");
   if (postsCountElement) {
