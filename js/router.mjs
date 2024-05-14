@@ -1,11 +1,28 @@
 import * as templates from "./templates/index.mjs";
 import * as handlers from "./handlers/index.mjs";
 import * as components from "./components/index.mjs";
+import { requireAuth } from "./storage/index.mjs";
 
 const path = location.pathname;
 
 export async function router() {
   handlers.setupLogoutButton();
+
+  if (sessionStorage.getItem("postDeleted")) {
+    sessionStorage.removeItem("postDeleted");
+
+    if (path === "/feed/" || path === "/feed" || path === "/feed/index.html") {
+      await templates.updateUserData();
+      await templates.renderPosts();
+    } else if (
+      path === "/profile/" ||
+      path === "/profile" ||
+      path === "/profile/index.html"
+    ) {
+      await templates.updateUserData();
+      await templates.renderUserPosts();
+    }
+  }
 
   switch (path) {
     //Main Page
@@ -29,6 +46,7 @@ export async function router() {
     case "/feed/":
     case "/feed":
     case "/feed/index.html":
+      requireAuth();
       await templates.updateUserData();
       templates.renderPosts();
       handlers.setCreatePostFormListener();
@@ -41,6 +59,7 @@ export async function router() {
     case "/feed/post/":
     case "/feed/post":
     case "/feed/post/index.html":
+      requireAuth();
       templates.updateUserData();
       const postId = window.location.pathname.split("/").pop();
       await templates.renderSinglePost(postId);
@@ -49,6 +68,7 @@ export async function router() {
     case "/feed/edit/":
     case "/feed/edit":
     case "/feed/edit.html":
+      requireAuth();
       await templates.updateUserData();
       handlers.setUpdatePostFormListener();
       break;
@@ -56,6 +76,7 @@ export async function router() {
     case "/profile/":
     case "/profile":
     case "/profile/index.html":
+      requireAuth();
       await templates.updateUserData();
       templates.renderUserPosts();
       break;
@@ -63,6 +84,7 @@ export async function router() {
     case "/profile/edit/":
     case "/profile/edit":
     case "/profile/edit/index.html":
+      requireAuth();
       await templates.updateUserData();
       handlers.setUpdateProfileListener();
       break;

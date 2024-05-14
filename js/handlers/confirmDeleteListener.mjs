@@ -9,7 +9,9 @@ export function addConfirmDeleteListener(modal, removePost, post) {
           let myModal = bootstrap.Modal.getInstance(modal);
           myModal.hide();
           post.remove();
+          sessionStorage.setItem("postDeleted", "true");
           alert("Post deleted successfully!");
+          updateUserPostCount();
         } else {
           alert("Failed to delete post");
         }

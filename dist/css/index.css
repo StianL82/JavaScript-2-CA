@@ -11869,6 +11869,34 @@ textarea.form-control-lg {
   }
 }
 /*---------- My custom CSS ----------*/
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.forFixedNav {
+  margin-top: 108px;
+}
+
+main {
+  flex: 1;
+}
+
+.footer {
+  width: 100%;
+  padding: 50px;
+}
+
+.form-control:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .dropdown-toggle::after {
   content: none;
 }
@@ -11877,15 +11905,74 @@ li {
   list-style-type: none;
 }
 
-.h1-logo {
-  font-family: Bangers, Arial, Helvetica, sans-serif;
-  font-size: clamp(1.6rem, 5vw, 3rem);
+.sticky-nav {
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
 }
 
-.welcome-text {
-  font-family: Lora, Arial, Helvetica, sans-serif;
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  color: #e6e5e5;
 }
 
+.modal-content {
+  width: 90%;
+  max-width: 500px;
+}
+
+.modal-dialog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100% - 3.5rem);
+}
+
+.edit-post-button {
+  width: 105px;
+}
+
+/*---------- Loader/Spinner ----------*/
+.loading-indicator {
+  display: none;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.loading-indicator p {
+  color: var(--color-white);
+}
+
+.post-loader p {
+  color: var(--color-black);
+}
+
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top: 4px solid #761313;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .userImage {
   width: 60px;
   height: 60px;
@@ -11940,7 +12027,6 @@ li {
 .icon-transform {
   max-width: 30px;
   max-height: 30px;
-  /*   transition: transform 0.3s, filter 0.3s; */
   cursor: pointer;
 }
 
@@ -11953,73 +12039,19 @@ li {
   transform: scale(1.1);
 }
 
+.h1-logo {
+  font-family: Bangers, Arial, Helvetica, sans-serif;
+  font-size: clamp(1.6rem, 5vw, 3rem);
+}
+
+.welcome-text {
+  font-family: Lora, Arial, Helvetica, sans-serif;
+}
+
 .profile-name {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-  color: #e6e5e5;
-}
-
-.sticky-nav {
-  position: fixed;
-  top: 0;
-  z-index: 1000;
-  width: 100%;
-}
-
-html,
-body {
-  height: 100%;
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-}
-
-.forFixedNav {
-  margin-top: 108px;
-}
-
-main {
-  flex: 1;
-}
-
-.footer {
-  width: 100%;
-  padding: 50px;
-}
-
-.form-control:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.modal-dialog {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: calc(100% - 3.5rem);
-}
-
-.modal-content {
-  width: 90%;
-  max-width: 500px;
-}
-
-.edit-post-button {
-  width: 105px;
 }
 
 .tag {
@@ -12035,40 +12067,6 @@ main {
   text-overflow: ellipsis;
   max-width: 100%;
   display: block;
-}
-
-/*---------- Loader/Spinner ----------*/
-.loading-indicator {
-  display: none;
-  text-align: center;
-  margin-top: 40px;
-}
-
-.loading-indicator p {
-  color: var(--color-white);
-}
-
-.post-loader p {
-  color: var(--color-black);
-}
-
-.spinner {
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  border-top: 4px solid #761313;
-  border-radius: 50%;
-  width: 80px;
-  height: 80px;
-  animation: spin 1s linear infinite;
-  margin: 0 auto;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
 }
 
 /*# sourceMappingURL=index.css.map */
