@@ -7,6 +7,26 @@ const method = "post";
 
 components.hydrateEmailField();
 
+/**
+ * Logs in a user by sending their profile data to the login API endpoint.
+ * Saves the access token and user profile to local storage if successful.
+ * Redirects to the feed page upon successful login.
+ *
+ * @async
+ * @function login
+ * @param {Object} profile - The profile data of the user attempting to log in.
+ * @param {string} profile.email - The email of the user.
+ * @param {string} profile.password - The password of the user.
+ * @returns {Promise<void>} - A promise that resolves when the login process is complete.
+ * @throws Will display an alert if the login fails or if there is a network error.
+ *
+ * @example
+ * const userProfile = {
+ *   email: "user@example.com",
+ *   password: "password123"
+ * };
+ * login(userProfile);
+ */
 export async function login(profile) {
   const loginURL = API_SOCIAL_URL + action;
   const body = JSON.stringify(profile);
