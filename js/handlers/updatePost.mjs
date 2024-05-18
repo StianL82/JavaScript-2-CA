@@ -34,9 +34,7 @@ export async function setUpdatePostFormListener() {
       try {
         const result = await updatePost(post);
         if (result) {
-          const returnUrl =
-            sessionStorage.getItem("returnUrl") || "/defaultPath";
-          sessionStorage.removeItem("returnUrl");
+          const returnUrl = "/profile";
           window.location.href = returnUrl + "?updated=true";
         }
       } catch (error) {
