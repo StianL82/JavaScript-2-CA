@@ -20,9 +20,9 @@ const method = "post";
  *
  * @example
  * const newUserProfile = {
- *   name: "John Doe",
- *   email: "john@example.com",
- *   password: "securepassword"
+ *   name: "Ola Nordmann",
+ *   email: "ola@example.com",
+ *   password: "testpassword"
  * };
  * register(newUserProfile);
  */
