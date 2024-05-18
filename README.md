@@ -51,8 +51,6 @@ git clone git@github.com/StianL82/JavaScript-2-CA/tree/JS2
 To run the git version, you will have to use npm install and npm run dev.
 [Link to page](https://stianl-javascript2-ca.netlify.app/)
 
-(The live Netlify link only contains css and not JavaScript, as we haven't learned how to do this properly yet.)
-
 ### Contributing
 
 This repo is not open to any contributions.
