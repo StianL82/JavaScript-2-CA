@@ -1,10 +1,10 @@
-# CSS-Frameworks CA
+# JavaScript 2 CA
 
 ## GrumpyBunch
 
 ![image](/images/readme/screencapture-stianl-css-frameworks-ca-netlify-app-feed-2024-04-06-18_23_22%201.png)
 
-This was mye first meeting with CSS Frameworks 😄
+In this CA, I continued the page I created for the CSS Frameworks CA and expanded it with JavaScript. 😄
 
 ## Visit the page at:
 
@@ -12,12 +12,21 @@ This was mye first meeting with CSS Frameworks 😄
 
 ## Description
 
-The goal was to apply knowledge of Bootstrap and SASS to build a responsive front end for a social media application.
-We where tasked with creating 3 pages in HTML using Bootstrap and SASS:
+The goal was to apply knowledge of JavaScript techniques to implement the front-end functionality for a social media application.
 
-- Authentication page (/index.html)
-- Feed Page (/feed/index.html)
-- Profile page (/profile/index.html)
+I chose to continue with the page I created for the CSS Frameworks CA. The goal was to build upon this hard-coded page with functional JavaScript.
+
+Required features was:
+
+- User with @noroff.no or @stud.noroff.no email can register profile
+- Registered user can login
+- User can view a post content feed
+- User can filter the post content feed
+- User can search the post content feed
+- User can view a post content item by ID
+- User can create a post content item
+- User can update a post content item
+- User can delete a post content item
 
 ## Built With
 
@@ -25,6 +34,7 @@ We where tasked with creating 3 pages in HTML using Bootstrap and SASS:
 - HTML
 - Bootstrap
 - SASS
+- JavaScript
 
 ## Getting Started
 
@@ -33,7 +43,7 @@ We where tasked with creating 3 pages in HTML using Bootstrap and SASS:
 Clone the repo:
 
 ```
-git clone git@github.com/StianL82/css-frameworks-ca.git
+git clone git@github.com/StianL82/JavaScript-2-CA/tree/JS2
 ```
 
 ### Running
