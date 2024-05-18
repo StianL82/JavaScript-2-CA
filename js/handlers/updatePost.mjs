@@ -34,8 +34,20 @@ export async function setUpdatePostFormListener() {
       try {
         const result = await updatePost(post);
         if (result) {
-          const returnUrl = "/profile";
-          window.location.href = returnUrl + "?updated=true";
+          const previousUrl = document.referrer;
+
+          let returnUrl;
+          if (previousUrl.includes("/feed/post/?id=")) {
+            returnUrl = "/profile";
+          } else {
+            returnUrl =
+              sessionStorage.getItem("returnUrl") ||
+              previousUrl ||
+              "/defaultPath";
+          }
+
+          sessionStorage.removeItem("returnUrl");
+          window.location.href = returnUrl;
         }
       } catch (error) {
         console.error("Error updating post:", error);
