@@ -1,0 +1,27 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.forFixedNav{
+  margin-top: 108px
+}
+
+main {
+  flex: 1;
+}
+
+.footer {
+  width: 100%;
+  padding: 50px;
+}
+
+.form-control:disabled{
+  opacity: 0.5;
+  cursor: not-allowed;
+}

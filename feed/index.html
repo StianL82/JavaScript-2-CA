@@ -9,52 +9,53 @@
     />
     <title>Feed Page | GrumpyBunch</title>
     <link rel="stylesheet" href="/dist/css/index.css" />
-    <script
-      defer
-      src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
-    ></script>
+    <script type="module" src="../js/index.mjs"></script>
     <link rel="icon" href="/images/profile_me_small.png" />
   </head>
-  <body class="bg-dark">
-    <nav class="navbar sticky-top navbar-expand-lg bg-danger">
-      <div class="container">
-        <div class="brand-logo">
-          <a class="navbar-brand" href="#">
-            <h1 class="h1-logo text-white">GrumpyBunch</h1>
-          </a>
+  <body class="bg-dark forFixedNav">
+    <header>
+      <nav class="navbar sticky-nav navbar-expand-lg bg-danger">
+        <div class="container">
+          <div class="brand-logo">
+            <a class="navbar-brand" href="#">
+              <h1 class="h1-logo text-white">GrumpyBunch</h1>
+            </a>
+          </div>
+          <div class="nav-item dropdown py-3">
+            <a
+              class="nav-link dropdown-toggle d-flex justify-content-end me-2"
+              data-bs-toggle="dropdown"
+              href="#"
+              role="button"
+              aria-expanded="false"
+            >
+              <img
+                class="avatar-image userImage rounded-circle me-3"
+                src="https://via.placeholder.com/150"
+                alt="The profile image of the logged in user"
+              />
+            </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end"
+              style="right: 0; left: auto"
+            >
+              <li>
+                <a class="dropdown-item" href="../profile/">Go to Profile</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="../profile/edit/"
+                  >Profile Settings</a
+                >
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a class="dropdown-item" href="#" id="logoutButton">Log Out</a>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div class="nav-item dropdown py-3">
-          <a
-            class="nav-link dropdown-toggle d-flex justify-content-end me-2"
-            data-bs-toggle="dropdown"
-            href="#"
-            role="button"
-            aria-expanded="false"
-          >
-            <img
-              src="../images/profile_me_small.png"
-              class="userimage"
-              alt="Profile Picture"
-            />
-          </a>
-          <ul
-            class="dropdown-menu dropdown-menu-end"
-            style="right: 0; left: auto"
-          >
-            <li>
-              <a class="dropdown-item" href="../profile/index.html"
-                >View Profile</a
-              >
-            </li>
-            <li>
-              <a class="dropdown-item disabled" href="#">Profile Settings</a>
-            </li>
-            <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" href="../index.html">Log Out</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+      </nav>
+    </header>
 
     <main>
       <div class="container mb-5 p-0">
@@ -72,53 +73,7 @@
       </div>
       <div class="container p-4">
         <div class="row d-flex justify-content-center">
-          <div class="container border mb-4 bg-info2 rounded-2">
-            <div class="row">
-              <h2 class="text-center text-dark my-3">Latest Posters</h2>
-              <div class="row mx-auto justify-content-center">
-                <div class="col-3 col-md-2 m-2 text-center">
-                  <img
-                    src="../images/latest_post_1.png"
-                    class="profile-picture img-fluid"
-                    alt="User profile image 1"
-                  />
-                  <p class="profile-name text-black">Mad-John</p>
-                </div>
-                <div class="col-3 col-md-2 m-2 text-center">
-                  <img
-                    src="../images/latest_post_2.png"
-                    class="profile-picture img-fluid"
-                    alt="User profile image 2"
-                  />
-                  <p class="profile-name text-black">angryone</p>
-                </div>
-                <div class="col-3 col-md-2 m-2 text-center">
-                  <img
-                    src="../images/latest_post_3.png"
-                    class="profile-picture img-fluid"
-                    alt="User profile image 3"
-                  />
-                  <p class="profile-name text-black">PrettyInStink</p>
-                </div>
-                <div class="col-3 col-md-2 m-2 text-center">
-                  <img
-                    src="../images/latest_post_10.png"
-                    class="profile-picture img-fluid"
-                    alt="User profile image 4"
-                  />
-                  <p class="profile-name text-black">happyexplorer</p>
-                </div>
-                <div class="col-3 col-md-2 m-2 text-center">
-                  <img
-                    src="../images/latest_post_5.png"
-                    class="profile-picture img-fluid"
-                    alt="User profile image 5"
-                  />
-                  <p class="profile-name text-black">old-guy-78</p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <div class="divider border mb-4"></div>
 
           <h3 class="text-white text-center mt-3">Add new Post</h3>
           <div class="container">
@@ -126,32 +81,56 @@
               <div class="col-12 bg-info rounded-2 text-black">
                 <div class="d-flex align-items-center mb-2">
                   <img
-                    src="../images/profile_me_small.png"
-                    class="profile-pic ps-md-4 p-lg-2 pb-0 pt-3"
+                    class="avatar-image img-fluid profile-pic mt-3 rounded-circle d-block"
+                    src="https://via.placeholder.com/150"
                     alt="The profile image of the logged in user"
                   />
-                  <p class="text-center text-danger fs-5 ms-3 mt-4">
-                    StianL-82
-                  </p>
+                  <p
+                    class="loggedInUsername text-center text-danger fs-5 ms-3 mt-4"
+                  ></p>
                 </div>
-                <form class="border bg-info rounded-2">
+                <form id="createPost" class="border bg-info rounded-2">
                   <div class="form-group m-2">
-                    <label for="postTitle">Post Title</label>
+                    <label for="postTitle">Title</label>
                     <input
                       type="text"
+                      name="title"
                       class="form-control"
                       id="postTitle"
                       placeholder="Enter post title"
+                      required
                     />
                   </div>
                   <div class="form-group m-2">
-                    <label for="postContent">Post Content</label>
+                    <label for="postContent">Content</label>
                     <textarea
                       class="form-control"
+                      name="body"
                       id="postContent"
                       rows="3"
                       placeholder="Enter post content"
+                      required
                     ></textarea>
+                  </div>
+                  <div class="form-group m-2">
+                    <label for="postTags">Tags</label>
+                    <input
+                      type="text"
+                      name="tags"
+                      class="form-control"
+                      id="postTags"
+                      placeholder="Enter post tag (Optional)"
+                    />
+                  </div>
+                  <div class="form-group m-2">
+                    <label for="postMedia">Media</label>
+                    <input
+                      type="url"
+                      name="media"
+                      class="form-control"
+                      id="postMedia"
+                      placeholder="Enter url for post Image (Optional)"
+                    />
                   </div>
                   <button
                     type="submit"
@@ -177,999 +156,65 @@
             <div class="col-md-6 mb-4">
               <label for="sortBy" class="sr-only text-white">Sort by</label>
               <select id="sortBy" class="form-control text-black">
-                <option>Sort by Date</option>
-                <option>Sort by Popularity</option>
+                <option value="all">Show All Posts</option>
+                <option value="hasMedia">Posts with Media</option>
+                <option value="grumpyEmail">GrumpyBunch Users</option>
               </select>
             </div>
           </div>
 
           <div class="col-md-12 mb-4">
             <h3 class="text-white text-center mt-3">Latest Posts</h3>
-            <div class="card mb-4 bg-info text-black">
-              <div class="row">
-                <div
-                  class="col-sm-4 col-md-3 col-lg-2 d-flex flex-column align-items-center justify-content-center"
-                >
-                  <div>
-                    <img
-                      src="../images/latest_post_1.png"
-                      class="card-img-top img-fluid p-3 pb-0"
-                      alt="Thumbnail 1"
-                    />
-                  </div>
-                  <p class="text-center text-danger">Mad-John</p>
-                </div>
-                <div
-                  class="card-body col-sm-8 col-md-9 d-flex flex-column align-items-stretch"
-                >
-                  <div
-                    class="d-flex-column border border-dark rounded-2 m-2 bg-custom-light-grey"
-                  >
-                    <h4 class="card-title mb-3 p-2">
-                      Laundry Day Lamentations: The Sock Thief Strikes Again
-                    </h4>
-                    <p class="card-text p-2">
-                      Just finished folding my laundry when I realized one sock
-                      from every pair mysteriously vanished. Is there a sock
-                      thief lurking in my laundry room, or have they simply
-                      eloped with the dryer's missing socks?
-                    </p>
-                  </div>
-                  <div
-                    class="d-flex justify-content-start me-3 mt-2 align-items-center"
-                  >
-                    <img
-                      src="../images/icon_thumbsdown.png"
-                      class="icon-xs"
-                      alt="Thumbs down icon"
-                    />
-                    <img
-                      src="../images/icon_crap.png"
-                      class="icon-xs"
-                      alt="Crap icon"
-                    />
-                    <img
-                      src="../images/icon_middle_finger.png"
-                      class="icon-xs"
-                      alt="Middle finger icon"
-                    />
-                    <img
-                      src="../images/icon_worst_ever.png"
-                      class="icon-xs"
-                      alt="Flaming worst ever icon"
-                    />
-                    <h4 class="likes ms-2">13</h4>
-                  </div>
-                  <div
-                    class="d-flex justify-content-end gap-4 me-3 mt-2 align-items-center"
-                  >
-                    <div class="dropdown">
-                      <button
-                        class="btn btn-secondary dropdown-toggle"
-                        type="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
-                        <img
-                          src="../images/icon_thumbsdown.png"
-                          class="icon-small"
-                          alt="Thumbs down dropdown-menu icon"
-                        />
-                      </button>
-                      <ul class="dropdown-menu">
-                        <li>
-                          <img
-                            src="../images/icon_thumbsdown.png"
-                            class="icon-small"
-                            alt="Thumbs down icon"
-                          />
-                          Dislike
-                        </li>
-                        <li>
-                          <img
-                            src="../images/icon_crap.png"
-                            class="icon-small"
-                            alt="Crap icon"
-                          />
-                          Total Crap
-                        </li>
-                        <li>
-                          <img
-                            src="../images/icon_middle_finger.png"
-                            class="icon-small"
-                            alt="Middle finger icon"
-                          />
-                          Hate This
-                        </li>
-                        <li>
-                          <img
-                            src="../images/icon_worst_ever.png"
-                            class="icon-small"
-                            alt="Flaming worst ever icon"
-                          />
-                          Worst EVER
-                        </li>
-                      </ul>
-                    </div>
-                    <div>
-                      <img
-                        src="../images/icon_comment.png"
-                        class="icon-small"
-                        alt="comment icon"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div class="loading-indicator">
+              <div class="spinner"></div>
+              <p>Loading...</p>
             </div>
-            <div class="card mb-4 bg-info text-black">
-              <div class="row">
-                <div
-                  class="col-sm-4 col-md-3 col-lg-2 d-flex flex-column align-items-center justify-content-center"
-                >
-                  <div>
-                    <img
-                      src="../images/latest_post_2.png"
-                      class="card-img-top p-3 pb-0"
-                      alt="Thumbnail 2"
-                    />
-                  </div>
-                  <p class="text-center text-danger">angryone</p>
-                </div>
-                <div
-                  class="card-body col-sm-8 col-md-9 d-flex flex-column align-items-stretch"
-                >
-                  <div
-                    class="d-flex-column border border-dark rounded-2 m-2 bg-custom-light-grey"
-                  >
-                    <h4 class="card-title mb-3 p-2">
-                      Grocery Store Gaffes: The Case of the Exploding Tomato
-                      Sauce
-                    </h4>
-                    <p class="card-text p-2">
-                      Went to grab a can of tomato sauce from the top shelf, but
-                      my klutzy hands had other plans. Now I'm stuck with a
-                      sticky mess and an aisle full of witnesses—cue the
-                      embarrassment
-                    </p>
-                  </div>
-                  <div
-                    class="d-flex justify-content-start me-3 mt-2 align-items-center"
-                  >
-                    <img
-                      src="../images/icon_middle_finger.png"
-                      class="icon-xs"
-                      alt="Middle finger icon"
-                    />
-                    <img
-                      src="../images/icon_worst_ever.png"
-                      class="icon-xs"
-                      alt="Flaming worst ever icon"
-                    />
-                    <h4 class="likes ms-2">10</h4>
-                  </div>
-                  <div
-                    class="d-flex justify-content-end gap-4 me-3 mt-2 align-items-center"
-                  >
-                    <div class="dropdown">
+            <div id="postsList">
+              <!-- Her rendrer du postene -->
+              <!-- Modalen for sletting -->
+              <!--               <div
+                class="modal fade staticBackdrop"
+                data-bs-backdrop="static"
+                data-bs-keyboard="false"
+                tabindex="-1"
+                aria-labelledby="staticBackdropLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                        Delete Post
+                      </h1>
                       <button
-                        class="btn btn-secondary dropdown-toggle"
                         type="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
-                        <img
-                          src="../images/icon_thumbsdown.png"
-                          class="icon-small"
-                          alt="Thumbs down icon"
-                        />
-                      </button>
-                      <ul class="dropdown-menu">
-                        <li>
-                          <img
-                            src="../images/icon_thumbsdown.png"
-                            class="icon-small"
-                            alt="Thumbs down icon"
-                          />
-                          Dislike
-                        </li>
-                        <li>
-                          <img
-                            src="../images/icon_crap.png"
-                            class="icon-small"
-                            alt="Crap icon"
-                          />
-                          Total Crap
-                        </li>
-                        <li>
-                          <img
-                            src="../images/icon_middle_finger.png"
-                            class="icon-small"
-                            alt="Middle finger icon"
-                          />
-                          Hate This
-                        </li>
-                        <li>
-                          <img
-                            src="../images/icon_worst_ever.png"
-                            class="icon-small"
-                            alt="Flaming worst ever icon"
-                          />
-                          Worst EVER
-                        </li>
-                      </ul>
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
                     </div>
-                    <div>
-                      <img
-                        src="../images/icon_comment.png"
-                        class="icon-small"
-                        alt="comment icon"
-                      />
+                    <div class="modal-body">
+                      Are you sure you want to delete the post?
                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="card mb-4 bg-info text-black">
-              <div class="row">
-                <div
-                  class="col-sm-4 col-md-3 col-lg-2 d-flex flex-column align-items-center justify-content-center"
-                >
-                  <div>
-                    <img
-                      src="../images/latest_post_3.png"
-                      class="card-img-top p-3 pb-0"
-                      alt="Thumbnail 3"
-                    />
-                  </div>
-                  <p class="text-center text-danger">Pretty_In_Stink</p>
-                </div>
-                <div
-                  class="card-body col-sm-8 col-md-9 d-flex flex-column align-items-stretch"
-                >
-                  <div
-                    class="d-flex-column border border-dark rounded-2 m-2 bg-custom-light-grey"
-                  >
-                    <h4 class="card-title mb-3 p-2">
-                      Rainy Day Blues: The Umbrella Conundrum
-                    </h4>
-                    <p class="card-text p-2">
-                      Thought I was prepared for the rainy weather with my
-                      trusty umbrella, but turns out it's more hole than
-                      coverage. Now I'm stuck dodging raindrops like a ninja
-                      while my umbrella does its best impression of a sieve.
-                    </p>
-                  </div>
-                  <div
-                    class="d-flex justify-content-start me-3 mt-2 align-items-center"
-                  >
-                    <img
-                      src="../images/icon_thumbsdown.png"
-                      class="icon-xs"
-                      alt="Thumbs down icon"
-                    />
-                    <img
-                      src="../images/icon_crap.png"
-                      class="icon-xs"
-                      alt="Crap Icon"
-                    />
-                    <img
-                      src="../images/icon_middle_finger.png"
-                      class="icon-xs"
-                      alt="Middle finger icon"
-                    />
-                    <h4 class="likes ms-2">31</h4>
-                  </div>
-                  <div
-                    class="d-flex justify-content-end gap-4 me-3 mt-2 align-items-center"
-                  >
-                    <div class="dropdown">
+                    <div class="modal-footer">
                       <button
-                        class="btn btn-secondary dropdown-toggle"
                         type="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
                       >
-                        <img
-                          src="../images/icon_thumbsdown.png"
-                          class="icon-small"
-                          alt="Thumbs down dropdown-menu icon"
-                        />
+                        Close
                       </button>
-                      <ul class="dropdown-menu">
-                        <li>
-                          <img
-                            src="../images/icon_thumbsdown.png"
-                            class="icon-small"
-                            alt="Thumbs down icon"
-                          />
-                          Dislike
-                        </li>
-                        <li>
-                          <img
-                            src="../images/icon_crap.png"
-                            class="icon-small"
-                            alt="Crap icon"
-                          />
-                          Total Crap
-                        </li>
-                        <li>
-                          <img
-                            src="../images/icon_middle_finger.png"
-                            class="icon-small"
-                            alt="Middle finger icon"
-                          />
-                          Hate This
-                        </li>
-                        <li>
-                          <img
-                            src="../images/icon_worst_ever.png"
-                            class="icon-small"
-                            alt="Flaming worst ever icon"
-                          />
-                          Worst EVER
-                        </li>
-                      </ul>
-                    </div>
-                    <div>
-                      <img
-                        src="../images/icon_comment.png"
-                        class="icon-small"
-                        alt="comment icon"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="card mb-4 bg-info text-black">
-              <div class="row">
-                <div
-                  class="col-sm-4 col-md-3 col-lg-2 d-flex flex-column align-items-center justify-content-center"
-                >
-                  <div>
-                    <img
-                      src="../images/latest_post_10.png"
-                      class="card-img-top p-3 pb-0"
-                      alt="Thumbnail 4"
-                    />
-                  </div>
-                  <p class="text-center text-danger">happyexplorer</p>
-                </div>
-                <div
-                  class="card-body col-sm-8 col-md-9 d-flex flex-column align-items-stretch"
-                >
-                  <div
-                    class="d-flex-column border border-dark rounded-2 m-2 bg-custom-light-grey"
-                  >
-                    <h4 class="card-title mb-3 p-2">
-                      Morning Mishaps: A Toasty Dilemma
-                    </h4>
-                    <p class="card-text p-2">
-                      Started my day by popping a slice of bread into the
-                      toaster, only to watch it get stuck mid-toast. Now I'm
-                      torn between trying to fish it out with a fork or waiting
-                      for it to magically reappear unburnt.
-                    </p>
-                  </div>
-                  <div
-                    class="d-flex justify-content-start me-3 mt-2 align-items-center"
-                  >
-                    <img
-                      src="../images/icon_crap.png"
-                      class="icon-xs"
-                      alt="Crap icon"
-                    />
-                    <h4 class="likes ms-2">2</h4>
-                  </div>
-                  <div
-                    class="d-flex justify-content-end gap-4 me-3 mt-2 align-items-center"
-                  >
-                    <div class="dropdown">
                       <button
-                        class="btn btn-secondary dropdown-toggle"
                         type="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
+                        class="btn btn-danger"
+                        id="confirmDeleteButton"
                       >
-                        <img
-                          src="../images/icon_thumbsdown.png"
-                          class="icon-small"
-                          alt="Thumbs down icon"
-                        />
+                        Delete Post
                       </button>
-                      <ul class="dropdown-menu">
-                        <li>
-                          <img
-                            src="../images/icon_thumbsdown.png"
-                            class="icon-small"
-                            alt="Thumbs down icon"
-                          />
-                          Dislike
-                        </li>
-                        <li>
-                          <img
-                            src="../images/icon_crap.png"
-                            class="icon-small"
-                            alt="Crap icon"
-                          />
-                          Total Crap
-                        </li>
-                        <li>
-                          <img
-                            src="../images/icon_middle_finger.png"
-                            class="icon-small"
-                            alt="Middle finger icon"
-                          />
-                          Hate This
-                        </li>
-                        <li>
-                          <img
-                            src="../images/icon_worst_ever.png"
-                            class="icon-small"
-                            alt="Flaming worst ever icon"
-                          />
-                          Worst EVER
-                        </li>
-                      </ul>
-                    </div>
-                    <div>
-                      <img
-                        src="../images/icon_comment.png"
-                        class="icon-small"
-                        alt="comment icon"
-                      />
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div class="card mb-4 bg-info text-black">
-              <div class="row">
-                <div
-                  class="col-sm-4 col-md-3 col-lg-2 d-flex flex-column align-items-center justify-content-center"
-                >
-                  <div>
-                    <img
-                      src="../images/latest_post_5.png"
-                      class="card-img-top p-3 pb-0"
-                      alt="Thumbnail 5"
-                    />
-                  </div>
-                  <p class="text-center text-danger">old-guy-78</p>
-                </div>
-                <div
-                  class="card-body col-sm-8 col-md-9 d-flex flex-column align-items-stretch"
-                >
-                  <div
-                    class="d-flex-column border border-dark rounded-2 m-2 bg-custom-light-grey"
-                  >
-                    <h4 class="card-title mb-3 p-2">
-                      Tech Troubles: The Case of the Vanishing Wi-Fi Signal
-                    </h4>
-                    <p class="card-text p-2">
-                      Sat down to binge-watch my favorite show, only to discover
-                      my Wi-Fi signal has decided to take an impromptu vacation.
-                      Now I'm left staring at a buffering screen and questioning
-                      my life choices—why do bad things happen to good Wi-Fi
-                    </p>
-                  </div>
-                  <div
-                    class="d-flex justify-content-start me-3 mt-2 align-items-center"
-                  >
-                    <img
-                      src="../images/icon_thumbsdown.png"
-                      class="icon-xs"
-                      alt="Thumbs down icon"
-                    />
-                    <img
-                      src="../images/icon_crap.png"
-                      class="icon-xs"
-                      alt="Crap icon"
-                    />
-                    <img
-                      src="../images/icon_middle_finger.png"
-                      class="icon-xs"
-                      alt="Middle finger icon"
-                    />
-                    <h4 class="likes ms-2">24</h4>
-                  </div>
-                  <div
-                    class="d-flex justify-content-end gap-4 me-3 mt-2 align-items-center"
-                  >
-                    <div class="dropdown">
-                      <button
-                        class="btn btn-secondary dropdown-toggle"
-                        type="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
-                        <img
-                          src="../images/icon_thumbsdown.png"
-                          class="icon-small"
-                          alt="Thumbs down dropdown-menu icon"
-                        />
-                      </button>
-                      <ul class="dropdown-menu">
-                        <li>
-                          <img
-                            src="../images/icon_thumbsdown.png"
-                            class="icon-small"
-                            alt="Thumbs down icon"
-                          />
-                          Dislike
-                        </li>
-                        <li>
-                          <img
-                            src="../images/icon_crap.png"
-                            class="icon-small"
-                            alt="Crap icon"
-                          />
-                          Total Crap
-                        </li>
-                        <li>
-                          <img
-                            src="../images/icon_middle_finger.png"
-                            class="icon-small"
-                            alt="Middle finger icon"
-                          />
-                          Hate This
-                        </li>
-                        <li>
-                          <img
-                            src="../images/icon_worst_ever.png"
-                            class="icon-small"
-                            alt="Flaming worst ever icon"
-                          />
-                          Worst EVER
-                        </li>
-                      </ul>
-                    </div>
-                    <div>
-                      <img
-                        src="../images/icon_comment.png"
-                        class="icon-small"
-                        alt="comment icon"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="card mb-4 bg-info text-black">
-              <div class="row">
-                <div
-                  class="col-sm-4 col-md-3 col-lg-2 d-flex flex-column align-items-center justify-content-center"
-                >
-                  <div>
-                    <img
-                      src="../images/latest_post_6.png"
-                      class="card-img-top p-3 pb-0"
-                      alt="Thumbnail 6"
-                    />
-                  </div>
-                  <p class="text-center text-danger">YourFavSpider</p>
-                </div>
-                <div
-                  class="card-body col-sm-8 col-md-9 d-flex flex-column align-items-stretch"
-                >
-                  <div
-                    class="d-flex-column border border-dark rounded-2 m-2 bg-custom-light-grey"
-                  >
-                    <h4 class="card-title mb-3 p-2">
-                      Monday Madness: The Great Coffee Spill
-                    </h4>
-                    <p class="card-text p-2">
-                      Started my week with a bang—or more accurately, a spill.
-                      Managed to knock over my freshly brewed coffee mug,
-                      turning my desk into a caffeine-infused swamp. Here's to
-                      hoping the rest of the day is less chaotic!
-                    </p>
-                  </div>
-                  <div
-                    class="d-flex justify-content-start me-3 mt-2 align-items-center"
-                  >
-                    <img
-                      src="../images/icon_thumbsdown.png"
-                      class="icon-xs"
-                      alt="Thumbs down icon"
-                    />
-                    <img
-                      src="../images/icon_crap.png"
-                      class="icon-xs"
-                      alt="Crap icon"
-                    />
-                    <img
-                      src="../images/icon_middle_finger.png"
-                      class="icon-xs"
-                      alt="Middle finger icon"
-                    />
-                    <img
-                      src="../images/icon_worst_ever.png"
-                      class="icon-xs"
-                      alt="Flaming worst ever icon"
-                    />
-                    <h4 class="likes ms-2">19</h4>
-                  </div>
-                  <div
-                    class="d-flex justify-content-end gap-4 me-3 mt-2 align-items-center"
-                  >
-                    <div class="dropdown">
-                      <button
-                        class="btn btn-secondary dropdown-toggle"
-                        type="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
-                        <img
-                          src="../images/icon_thumbsdown.png"
-                          class="icon-small"
-                          alt="Thumbs down dropdown-menu icon"
-                        />
-                      </button>
-                      <ul class="dropdown-menu">
-                        <li>
-                          <img
-                            src="../images/icon_thumbsdown.png"
-                            class="icon-small"
-                            alt="Thumbs down icon"
-                          />
-                          Dislike
-                        </li>
-                        <li>
-                          <img
-                            src="../images/icon_crap.png"
-                            class="icon-small"
-                            alt="Crap icon"
-                          />
-                          Total Crap
-                        </li>
-                        <li>
-                          <img
-                            src="../images/icon_middle_finger.png"
-                            class="icon-small"
-                            alt="Middle finger icon"
-                          />
-                          Hate This
-                        </li>
-                        <li>
-                          <img
-                            src="../images/icon_worst_ever.png"
-                            class="icon-small"
-                            alt="Flaming worst ever icon"
-                          />
-                          Worst EVER
-                        </li>
-                      </ul>
-                    </div>
-                    <div>
-                      <img
-                        src="../images/icon_comment.png"
-                        class="icon-small"
-                        alt="comment icon"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="card mb-4 bg-info text-black">
-              <div class="row">
-                <div
-                  class="col-sm-4 col-md-3 col-lg-2 d-flex flex-column align-items-center justify-content-center"
-                >
-                  <div>
-                    <img
-                      src="../images/latest_post_7.png"
-                      class="card-img-top p-3 pb-0"
-                      alt="Thumbnail 7"
-                    />
-                  </div>
-                  <p class="text-center text-danger">AngryDogLady</p>
-                </div>
-                <div
-                  class="card-body col-sm-8 col-md-9 d-flex flex-column align-items-stretch"
-                >
-                  <div
-                    class="d-flex-column border border-dark rounded-2 m-2 bg-custom-light-grey"
-                  >
-                    <h4 class="card-title mb-3 p-2">
-                      Kitchen Chronicles: The Quest for the Missing Tupperware
-                      Lids
-                    </h4>
-                    <p class="card-text p-2">
-                      Set out to meal prep like a responsible adult, only to
-                      realize that half of my Tupperware lids have mysteriously
-                      disappeared into the abyss. Looks like I'll be playing a
-                      game of mismatched containers for the foreseeable future!
-                    </p>
-                  </div>
-                  <div
-                    class="d-flex justify-content-start me-3 mt-2 align-items-center"
-                  >
-                    <img
-                      src="../images/icon_crap.png"
-                      class="icon-xs"
-                      alt="Crap icon"
-                    />
-                    <img
-                      src="../images/icon_middle_finger.png"
-                      class="icon-xs"
-                      alt="Middle finger icon"
-                    />
-                    <h4 class="likes ms-2">7</h4>
-                  </div>
-                  <div
-                    class="d-flex justify-content-end gap-4 me-3 mt-2 align-items-center"
-                  >
-                    <div class="dropdown">
-                      <button
-                        class="btn btn-secondary dropdown-toggle"
-                        type="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
-                        <img
-                          src="../images/icon_thumbsdown.png"
-                          class="icon-small"
-                          alt="Thumbs down icon"
-                        />
-                      </button>
-                      <ul class="dropdown-menu">
-                        <li>
-                          <img
-                            src="../images/icon_thumbsdown.png"
-                            class="icon-small"
-                            alt="Thumbs down icon"
-                          />
-                          Dislike
-                        </li>
-                        <li>
-                          <img
-                            src="../images/icon_crap.png"
-                            class="icon-small"
-                            alt="Crap icon"
-                          />
-                          Total Crap
-                        </li>
-                        <li>
-                          <img
-                            src="../images/icon_middle_finger.png"
-                            class="icon-small"
-                            alt="Middle finger icon"
-                          />
-                          Hate This
-                        </li>
-                        <li>
-                          <img
-                            src="../images/icon_worst_ever.png"
-                            class="icon-small"
-                            alt="Flaming worst ever icon"
-                          />
-                          Worst EVER
-                        </li>
-                      </ul>
-                    </div>
-                    <div>
-                      <img
-                        src="../images/icon_comment.png"
-                        class="icon-small"
-                        alt="comment icon"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="card mb-4 bg-info text-black">
-              <div class="row">
-                <div
-                  class="col-sm-4 col-md-3 col-lg-2 d-flex flex-column align-items-center justify-content-center"
-                >
-                  <div>
-                    <img
-                      src="../images/latest_post_8.png"
-                      class="card-img-top p-3 pb-0"
-                      alt="Thumbnail 8"
-                    />
-                  </div>
-                  <p class="text-center text-danger">BookwormBelle</p>
-                </div>
-                <div
-                  class="card-body col-sm-8 col-md-9 d-flex flex-column align-items-stretch"
-                >
-                  <div
-                    class="d-flex-column border border-dark rounded-2 m-2 bg-custom-light-grey"
-                  >
-                    <h4 class="card-title mb-3 p-2">
-                      Workday Woes: The Battle of the Never-Ending Email Chain
-                    </h4>
-                    <p class="card-text p-2">
-                      Thought I was making progress on my inbox, only to realize
-                      I've been sucked into a never-ending email chain that
-                      rivals the length of a Tolstoy novel. At this rate, I'll
-                      be sending my replies via carrier pigeon by the end of the
-                      day.
-                    </p>
-                  </div>
-                  <div
-                    class="d-flex justify-content-start me-3 mt-2 align-items-center"
-                  >
-                    <img
-                      src="../images/icon_thumbsdown.png"
-                      class="icon-xs"
-                      alt="Thumbs down icon"
-                    />
-                    <h4 class="likes ms-2">4</h4>
-                  </div>
-                  <div
-                    class="d-flex justify-content-end gap-4 me-3 mt-2 align-items-center"
-                  >
-                    <div class="dropdown">
-                      <button
-                        class="btn btn-secondary dropdown-toggle"
-                        type="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
-                        <img
-                          src="../images/icon_thumbsdown.png"
-                          class="icon-small"
-                          alt="Thumbs down dropdown-menu icon"
-                        />
-                      </button>
-                      <ul class="dropdown-menu">
-                        <li>
-                          <img
-                            src="../images/icon_thumbsdown.png"
-                            class="icon-small"
-                            alt="Thumbs down icon"
-                          />
-                          Dislike
-                        </li>
-                        <li>
-                          <img
-                            src="../images/icon_crap.png"
-                            class="icon-small"
-                            alt="Crap icon"
-                          />
-                          Total Crap
-                        </li>
-                        <li>
-                          <img
-                            src="../images/icon_middle_finger.png"
-                            class="icon-small"
-                            alt="Middle finger icon"
-                          />
-                          Hate This
-                        </li>
-                        <li>
-                          <img
-                            src="../images/icon_worst_ever.png"
-                            class="icon-small"
-                            alt="Flaming worst ever icon"
-                          />
-                          Worst EVER
-                        </li>
-                      </ul>
-                    </div>
-                    <div>
-                      <img
-                        src="../images/icon_comment.png"
-                        class="icon-small"
-                        alt="comment icon"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="card mb-4 bg-info text-black">
-              <div class="row">
-                <div
-                  class="col-sm-4 col-md-3 col-lg-2 d-flex flex-column align-items-center justify-content-center"
-                >
-                  <div>
-                    <img
-                      src="../images/latest_post_9.png"
-                      class="card-img-top p-3 pb-0"
-                      alt="Thumbnail 9"
-                    />
-                  </div>
-                  <p class="text-center text-danger">password1234</p>
-                </div>
-                <div
-                  class="card-body col-sm-8 col-md-9 d-flex flex-column align-items-stretch"
-                >
-                  <div
-                    class="d-flex-column border border-dark rounded-2 m-2 bg-custom-light-grey"
-                  >
-                    <h4 class="card-title mb-3 p-2">
-                      Office Olympics: The Battle of the Broken Printer
-                    </h4>
-                    <p class="card-text p-2">
-                      Today's office Olympics event: fixing the printer. After a
-                      heroic attempt involving paper jams and ink cartridge
-                      acrobatics, I've come to the conclusion that the printer
-                      is possessed by a mischievous paper-eating gremlin.
-                    </p>
-                  </div>
-                  <div
-                    class="d-flex justify-content-start me-3 mt-2 align-items-center"
-                  >
-                    <img
-                      src="../images/icon_thumbsdown.png"
-                      class="icon-xs"
-                      alt="Thumbs down icon"
-                    />
-                    <img
-                      src="../images/icon_worst_ever.png"
-                      class="icon-xs"
-                      alt="Flaming worst ever icon"
-                    />
-                    <h4 class="likes ms-2">27</h4>
-                  </div>
-                  <div
-                    class="d-flex justify-content-end gap-4 me-3 mt-2 align-items-center"
-                  >
-                    <div class="dropdown">
-                      <button
-                        class="btn btn-secondary dropdown-toggle"
-                        type="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
-                        <img
-                          src="../images/icon_thumbsdown.png"
-                          class="icon-small"
-                          alt="Thumbs down dropdown-menu icon"
-                        />
-                      </button>
-                      <ul class="dropdown-menu">
-                        <li>
-                          <img
-                            src="../images/icon_thumbsdown.png"
-                            class="icon-small"
-                            alt="Thumbs down icon"
-                          />
-                          Dislike
-                        </li>
-                        <li>
-                          <img
-                            src="../images/icon_crap.png"
-                            class="icon-small"
-                            alt="Crap icon"
-                          />
-                          Total Crap
-                        </li>
-                        <li>
-                          <img
-                            src="../images/icon_middle_finger.png"
-                            class="icon-small"
-                            alt="Middle finger icon"
-                          />
-                          Hate This
-                        </li>
-                        <li>
-                          <img
-                            src="../images/icon_worst_ever.png"
-                            class="icon-small"
-                            alt="Flaming worst ever icon"
-                          />
-                          Worst EVER
-                        </li>
-                      </ul>
-                    </div>
-                    <div>
-                      <img
-                        src="../images/icon_comment.png"
-                        class="icon-small"
-                        alt="comment icon"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

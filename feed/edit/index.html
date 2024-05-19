@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="This is the edit post page for the Social Media App, GrumpyBunch."
+    />
+    <title>Edit Post Page | GrumpyBunch</title>
+    <link rel="stylesheet" href="../../dist/css/index.css" />
+    <script type="module" src="../../js/index.mjs"></script>
+    <link rel="icon" href="../../images/profile_me_small.png" />
+  </head>
+  <body class="bg-dark">
+    <header>
+      <nav class="navbar sticky-top navbar-expand-lg bg-danger">
+        <div class="container">
+          <div class="brand-logo">
+            <a class="navbar-brand" href="../../feed/">
+              <h1 class="h1-logo text-white">GrumpyBunch</h1>
+            </a>
+          </div>
+          <div class="nav-item dropdown py-3">
+            <a
+              class="nav-link dropdown-toggle d-flex justify-content-end me-2"
+              data-bs-toggle="dropdown"
+              href="#"
+              role="button"
+              aria-expanded="false"
+            >
+              <img
+                class="avatar-image userImage rounded-circle me-3"
+                src="https://via.placeholder.com/150"
+                alt="The profile image of the logged in user"
+              />
+            </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end"
+              style="right: 0; left: auto"
+            >
+              <li>
+                <a class="dropdown-item" href="../../feed/">Back to Feed</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="../../profile/"
+                  >Back to Profile</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="../../profile/edit/"
+                  >Profile Settings</a
+                >
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a class="dropdown-item" href="#" id="logoutButton">Log Out</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <div class="container p-4">
+        <div class="row d-flex justify-content-center">
+          <h2 class="text-white text-center mt-3">Edit Post</h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-12 bg-info rounded-2 text-black">
+                <div class="d-flex align-items-center mb-2">
+                  <img
+                    class="avatar-image userImage rounded-circle me-3"
+                    src="https://via.placeholder.com/150"
+                    alt="The profile image of the logged in user"
+                  />
+                  <p
+                    class="loggedInUsername text-center text-danger fs-5 ms-3 mt-4"
+                  ></p>
+                </div>
+                <form id="updatePost" class="border bg-info rounded-2">
+                  <div class="form-group m-2">
+                    <label for="postTitle">Title</label>
+                    <input
+                      type="text"
+                      name="title"
+                      class="form-control"
+                      id="postTitle"
+                      placeholder="Enter post title"
+                      required
+                    />
+                  </div>
+                  <div class="form-group m-2">
+                    <label for="postContent">Content</label>
+                    <textarea
+                      class="form-control"
+                      name="body"
+                      id="postContent"
+                      rows="3"
+                      placeholder="Enter post content"
+                      required
+                    ></textarea>
+                  </div>
+                  <div class="form-group m-2">
+                    <label for="postTags">Tags</label>
+                    <input
+                      type="text"
+                      name="tags"
+                      class="form-control"
+                      id="postTags"
+                      placeholder="Enter post tag (Optional)"
+                    />
+                  </div>
+                  <div class="form-group m-2">
+                    <label for="postMedia">Media</label>
+                    <input
+                      type="url"
+                      name="media"
+                      class="form-control"
+                      id="postMedia"
+                      placeholder="Enter url for post Image (Optional)"
+                    />
+                  </div>
+                  <div class="d-flex">
+                    <button
+                      type="button"
+                      class="btn btn-warning m-3 mx-auto d-block"
+                      onclick="window.history.back();"
+                    >
+                      Cancel Update
+                    </button>
+                    <button
+                      type="submit"
+                      class="btn btn-primary m-3 mx-auto d-block"
+                    >
+                      Update Post
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer
+      class="footer bg-danger d-flex justify-content-center align-items-center"
+      style="height: 100px"
+    >
+      <div class="text-center">
+        <span class="copyright text-white">© 2024 Stian Lilleng</span>
+      </div>
+    </footer>
+  </body>
+</html>

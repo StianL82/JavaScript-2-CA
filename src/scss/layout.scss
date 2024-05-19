@@ -1,0 +1,29 @@
+.h1-logo {
+  font-family: Bangers, Arial, Helvetica, sans-serif;
+  font-size: clamp(1.6rem, 5vw, 3rem); 
+}
+
+.welcome-text{
+  font-family: Lora, Arial, Helvetica, sans-serif;
+}
+
+.profile-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tag {
+  font-weight: bold;
+  color: #761313;
+  margin-right: 8px;
+}
+
+.author-name{
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  display: block;
+}
