@@ -16,7 +16,7 @@ The goal was to apply knowledge of JavaScript techniques to implement the front-
 
 I chose to continue with the page I created for the CSS Frameworks CA. The goal was to build upon this hard-coded page with functional JavaScript.
 
-Required features was:
+### Required features was:
 
 - User with @noroff.no or @stud.noroff.no email can register profile
 - Registered user can login
@@ -49,7 +49,7 @@ git clone git@github.com/StianL82/JavaScript-2-CA/tree/JS2
 ### Running
 
 To run the git version, you will have to use npm install and npm run dev.
-[Link to page](https://stianl-javascript2-ca.netlify.app/)
+[Link to Netlify page](https://stianl-javascript2-ca.netlify.app/)
 
 ### Contributing
 
